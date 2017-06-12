@@ -10,10 +10,22 @@
 	<packaging>jar</packaging>
 	<name>${project.artifactId}</name>
 	<description>The common module of hifox-core project</description>
-	<properties>
-		<skip_maven_deploy>true</skip_maven_deploy>
-	</properties>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+	
 	<dependencies>
 		
 	</dependencies>
+	
 </project>
