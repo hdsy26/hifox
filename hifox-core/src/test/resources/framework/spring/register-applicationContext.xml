@@ -42,7 +42,7 @@
 		<property name="registry" ref="serviceRegistry" />
 		<property name="resources">
 			<list>
-				<value>classpath*:application/*/service/*/*-service-registry.xml</value>
+				<value>classpath*:application/service/*/*-service-registry.xml</value>
 			</list>
 		</property>
 	</bean>

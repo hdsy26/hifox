@@ -10,8 +10,9 @@
 		http://www.springframework.org/schema/context/spring-context-4.2.xsd
 		http://www.springframework.org/schema/util
 		http://www.springframework.org/schema/util/spring-util-4.2.xsd">
-	
-	<bean class="org.edf.hifox.core.editor.Log4jClassEditor" init-method="edit" />
+		
+	<context:component-scan base-package="org.edf.hifox.core.service"/>
+	<context:annotation-config/>
 	
 	<!-- 属性占位符配置 -->
 	<bean id="propertyPlaceholderConfigurer"
@@ -76,6 +77,12 @@
     <bean class="org.springframework.beans.factory.config.MethodInvokingBean">
     	<property name="staticMethod" value="org.edf.hifox.core.util.OutboundUtil.setProcessor" />
     	<property name="arguments" ref="outboundProcessor"/>
+    </bean>
+    
+     <!-- 请求报文工具 -->
+    <bean class="org.springframework.beans.factory.config.MethodInvokingBean">
+    	<property name="staticMethod" value="org.edf.hifox.core.util.MessageUtil.setNodeId" />
+    	<property name="arguments" value="${nodeId}"/>
     </bean>
 	
 	

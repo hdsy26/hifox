@@ -11,8 +11,6 @@
 		http://www.springframework.org/schema/util
 		http://www.springframework.org/schema/util/spring-util-4.2.xsd">
 	
-	<bean class="org.edf.hifox.core.editor.Log4jClassEditor" init-method="edit" />
-	
 	<!-- 属性占位符配置 -->
 	<bean id="propertyPlaceholderConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"

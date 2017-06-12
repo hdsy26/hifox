@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings
+	xmlns="http://www.w3school.com.cn"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3school.com.cn ../../xsd/converter-registry.xsd">
+	
+	<mapping id="A000T000-test-request" converter-id="fmBeanToStrConverter" rulecreator-id="fmRuleCreator">
+		<template-def embed="application/converter/common-request.temp" encoding="UTF-8">
+			<value>
+			<![CDATA[
+			<BODY>
+			</BODY>
+			]]>
+			</value>
+		</template-def>
+	</mapping>
+	
+	<mapping id="A000T000-test-response" converter-id="xsXmlToBeanConverter" rulecreator-id="xsRuleCreator">
+		<class-defs>
+			<class-def name="org.edf.hifox.core.datatransfer.support.ResponseMessage">
+				<field-def name="body" field-type="org.edf.hifox.core.datatransfer.Body"
+					field-impl="org.edf.hifox.core.datatransfer.inbound.A000T000Resp" />
+			</class-def>
+		</class-defs>
+	</mapping>
+	
+</mappings>

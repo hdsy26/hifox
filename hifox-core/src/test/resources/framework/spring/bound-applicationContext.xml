@@ -58,7 +58,7 @@
 		p:defaultChain-ref="httpServiceOutboundChain">
 		<constructor-arg>
 			<map>
-				<entry key="requestMessage instanceof T(org.edf.hifox.datatransfer.Message) 
+				<entry key="requestMessage instanceof T(org.edf.hifox.core.datatransfer.Message) 
 					or requestMessage instanceof T(java.util.Map) 
 					or requestMessage instanceof T(java.lang.String)" value-ref="httpServiceOutboundChain" />
 			</map>

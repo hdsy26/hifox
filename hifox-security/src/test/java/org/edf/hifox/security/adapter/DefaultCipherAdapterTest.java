@@ -9,8 +9,10 @@ import org.edf.hifox.core.datatransfer.Body;
 import org.edf.hifox.core.datatransfer.Message;
 import org.edf.hifox.core.datatransfer.support.RequestHead;
 import org.edf.hifox.core.datatransfer.support.RequestMessage;
+import org.edf.hifox.core.editor.ClassEditor;
 import org.edf.hifox.core.util.SwapAreaUtil;
 import org.edf.hifox.security.datatransfer.inbound.A000S000Req;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -22,6 +24,15 @@ public class DefaultCipherAdapterTest {
 	
 	@Resource(name="defaultCipherAdapter")
 	private CipherAdapter cipherAdapter;
+	
+	@SuppressWarnings("unchecked")
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		String className = "org.edf.hifox.core.editor.Log4jClassEditor";
+		Class<ClassEditor> clazz = (Class<ClassEditor>) Class.forName(className);
+		ClassEditor classEditor = clazz.newInstance();
+		classEditor.edit();
+	}
 
 	@Test
 	public void testEncryptDecrypt_RSA() {
