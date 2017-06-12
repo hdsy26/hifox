@@ -19,7 +19,7 @@ public final class OutboundUtil {
 		
 	}
 	
-	public void setProcessor(Processor<Object, OutboundRequestInfo> processor) {
+	public static void setProcessor(Processor<Object, OutboundRequestInfo> processor) {
 		OutboundUtil.processor = processor;
 	}
 	
