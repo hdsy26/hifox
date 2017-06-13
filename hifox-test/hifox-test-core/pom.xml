@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.edf</groupId>
-		<artifactId>hifox-test-parent</artifactId>
+		<artifactId>hifox-test</artifactId>
 		<version>2.5.4-SNAPSHOT</version>
 	</parent>
 	<artifactId>hifox-test-core</artifactId>
@@ -16,14 +16,17 @@
 		<eclipse.useProjectReferences>false</eclipse.useProjectReferences>
 		<skip_maven_deploy>false</skip_maven_deploy>
 	</properties>
-	
+
 	<dependencies>
-		
+
 	</dependencies>
-	
+
 	<build>
 		<plugins>
-			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+			</plugin>
 		</plugins>
 	</build>
 </project>

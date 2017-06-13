@@ -7,7 +7,6 @@
 		<version>2.5.4-SNAPSHOT</version>
 	</parent>
 	<artifactId>hifox-test</artifactId>
-	<version>2.5.4-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>${project.artifactId}</name>
 	<description>The parent project of hifox-test-parent</description>
