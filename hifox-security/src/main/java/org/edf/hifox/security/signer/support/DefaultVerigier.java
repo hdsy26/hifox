@@ -7,17 +7,16 @@ import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.SecureRandom;
 import java.security.Signature;
-import java.security.SignatureException;
 
 import org.edf.hifox.core.exception.FailureException;
 import org.edf.hifox.core.util.SwapAreaUtil;
 import org.edf.hifox.security.constant.ErrorCodeConstant;
-import org.edf.hifox.security.signer.Signer;
+import org.edf.hifox.security.signer.Verifier;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
 
-public class DefaultSigner implements Signer, InitializingBean {
-	private String algorithm;
+public class DefaultVerigier implements Verifier, InitializingBean {
+	private String algorithm = "SHA1withDSA";
 	private KeyStore keyStore;
 	private Key key;
 	
@@ -26,7 +25,6 @@ public class DefaultSigner implements Signer, InitializingBean {
 	private String alias;
 	private String storeType;
 	private String storePassword;
-	private String keyPassword;
 	private SecureRandom secureRandom = new SecureRandom(new byte[]{});
 
 
@@ -45,7 +43,7 @@ public class DefaultSigner implements Signer, InitializingBean {
 		} catch (NoSuchAlgorithmException e) {
 			throw new FailureException(ErrorCodeConstant.E0001S070, new Object[]{algorithm}, e);
 		} catch (Exception e) {
-			throw new FailureException(ErrorCodeConstant.E0001S071, new Object[]{e.getMessage()}, e);
+			throw new FailureException(ErrorCodeConstant.E0001S072, new Object[]{e.getMessage()}, e);
 		}
 	}
 	
@@ -54,39 +52,38 @@ public class DefaultSigner implements Signer, InitializingBean {
 		try {
 			update(input.getBytes(charsetName));
 		} catch (Exception e) {
-			throw new FailureException(ErrorCodeConstant.E0001S071, new Object[]{e.getMessage()}, e);
+			throw new FailureException(ErrorCodeConstant.E0001S072, new Object[]{e.getMessage()}, e);
 		}
 	}
 	
-
 	@Override
-	public byte[] sign() {
+	public boolean verify(byte[] signValue) {
 		try {
 			Signature signature = SwapAreaUtil.getSignatureObject();
-			byte[] sign = signature.sign();
-			return sign;
-		} catch (SignatureException e) {
-			throw new FailureException(ErrorCodeConstant.E0001S071, new Object[]{e.getMessage()}, e);
-		}
-		
-	}
-	
-	@Override
-	public String signString() {
-		try {
-			String signString  = new String(sign(), charsetName);
-			return signString;
+			boolean result = signature.verify(signValue);
+			return result;
 		} catch (Exception e) {
-			throw new FailureException(ErrorCodeConstant.E0001S071, new Object[]{e.getMessage()}, e);
+			throw new FailureException(ErrorCodeConstant.E0001S072, new Object[]{e.getMessage()}, e);
+		}
+	}
+
+	@Override
+	public boolean verify(String signValueString) {
+		try {
+			boolean result = verify(signValueString.getBytes(charsetName));
+			return result;
+		} catch (Exception e) {
+			throw new FailureException(ErrorCodeConstant.E0001S072, new Object[]{e.getMessage()}, e);
 		}
 	}
 	
 	@Override
-	public String signString(String input) {
+	public boolean verify(String input, String signValueString) {
 		update(input);
-		String signString = signString();
-		return signString;
+		boolean result = verify(signValueString);
+		return result;
 	}
+	
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -95,7 +92,7 @@ public class DefaultSigner implements Signer, InitializingBean {
 			keyStore = KeyStore.getInstance(storeType);
 			is = resource.getInputStream();
 			keyStore.load(is, storePassword.toCharArray());
-			key = keyStore.getKey(alias, keyPassword.toCharArray());
+			key = keyStore.getCertificate(alias).getPublicKey();
 		} finally {
 			if (is != null)
 				is.close();
@@ -125,10 +122,6 @@ public class DefaultSigner implements Signer, InitializingBean {
 
 	public void setStorePassword(String storePassword) {
 		this.storePassword = storePassword;
-	}
-
-	public void setKeyPassword(String keyPassword) {
-		this.keyPassword = keyPassword;
 	}
 
 	public void setSecureRandom(SecureRandom secureRandom) {

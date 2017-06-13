@@ -17,5 +17,10 @@ public interface Signer {
 	 * 私钥签名
 	 * @return
 	 */
-	String sign(String charsetName);
+	String signString();
+	/**
+	 * 私钥签名
+	 * @return
+	 */
+	String signString(String input);
 }
