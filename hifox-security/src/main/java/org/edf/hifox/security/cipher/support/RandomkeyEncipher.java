@@ -8,10 +8,10 @@ import javax.crypto.SecretKey;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
-import org.edf.hifox.core.constant.ErrorCodeConstant;
 import org.edf.hifox.core.exception.FailureException;
 import org.edf.hifox.core.util.SwapAreaUtil;
 import org.edf.hifox.security.cipher.Encipher;
+import org.edf.hifox.security.constant.ErrorCodeConstant;
 import org.edf.hifox.security.meta.CipherMetainfo;
 import org.springframework.beans.factory.InitializingBean;
 

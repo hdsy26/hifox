@@ -22,4 +22,9 @@ public class ErrorCodeConstant {
 	 */
 	public static final String E0001S070 = "E0001S070";
 	
+	/**
+	 * 签名失败:{0}!
+	 */
+	public static final String E0001S071 = "E0001S071";
+	
 }

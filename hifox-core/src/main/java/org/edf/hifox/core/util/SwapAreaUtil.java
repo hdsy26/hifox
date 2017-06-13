@@ -1,5 +1,6 @@
 package org.edf.hifox.core.util;
 
+import java.security.Signature;
 import java.util.Map;
 
 import org.edf.hifox.core.constant.SwapAreaConstant;
@@ -291,6 +292,14 @@ public final class SwapAreaUtil {
 	
 	public static void setEncryptedRandomkey(byte[] randomkey) {
 		setValue(SwapAreaConstant.ENCRYPTED_RANDOMKEY, randomkey);
+	}
+	
+	public static Signature getSignatureObject() {
+		return getValue(SwapAreaConstant.SIGNATURE_OBJECT, Signature.class);
+	}
+	
+	public static void setSignatureObject(Signature signature) {
+		setValue(SwapAreaConstant.SIGNATURE_OBJECT, signature);
 	}
 
 }

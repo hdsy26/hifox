@@ -2,6 +2,9 @@ package org.edf.hifox.core.parser;
 
 import java.io.InputStream;
 
+import javax.xml.XMLConstants;
+import javax.xml.validation.SchemaFactory;
+
 import org.apache.commons.digester.Digester;
 import org.apache.commons.digester.xmlrules.DigesterLoader;
 import org.springframework.core.io.ClassPathResource;
@@ -41,7 +44,7 @@ public class DefaultParser implements Parser<Object> {
 			Digester digester = DigesterLoader.createDigester(new InputSource(ruleis));
 			if(schemaLocation != null) {
 				ClassPathResource res = new ClassPathResource(schemaLocation);
-				digester.setSchema(res.getURL().getPath());
+				digester.setXMLSchema(SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI).newSchema(res.getURL()));
 				digester.setValidating(true);
 			}
 		    digester.setNamespaceAware(true);

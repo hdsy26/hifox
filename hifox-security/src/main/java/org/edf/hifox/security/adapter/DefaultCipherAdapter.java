@@ -4,10 +4,10 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.edf.hifox.core.chain.Chain;
 import org.edf.hifox.core.chain.selector.ChainSelector;
-import org.edf.hifox.core.constant.ErrorCodeConstant;
 import org.edf.hifox.core.datatransfer.Body;
 import org.edf.hifox.core.exception.FailureException;
 import org.edf.hifox.core.util.SwapAreaUtil;
+import org.edf.hifox.security.constant.ErrorCodeConstant;
 import org.edf.hifox.security.constant.SecurityConstant;
 
 public class DefaultCipherAdapter implements CipherAdapter {
