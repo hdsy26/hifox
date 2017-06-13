@@ -16,6 +16,7 @@ keytool -list -rfc -storetype JCEKS -keystore ca_aes.keystore
 keytool -list -v -storetype JCEKS -keystore ca_aes.keystore
 
 SHA1withDSA
-keytool -genkey -dname "CN=wangyang,OU=server,O=server,L=SH,ST=SH,C=CN" -alias sign_sha1dsa -sigalg SHA1withDSA -keysize 1024 -keystore sign_sha1dsa.keystore -storetype JKS -storepass storepass -keypass keypass -validity 3650
-keytool -list -rfc -keystore sign_sha1dsa.keystore
-keytool -list -v -keystore sign_sha1dsa.keystore
+keytool -genkey -dname "CN=wangyang,OU=server,O=server,L=SH,ST=SH,C=CN" -alias n0001 -sigalg SHA1withDSA -keysize 1024 -keystore n0001.keystore -storetype JKS -storepass storepass -keypass keypass -validity 3650
+keytool -list -rfc -keystore n0001.keystore
+keytool -list -v -keystore n0001.keystore
+keytool -export -alias n0001 -keystore n0001.keystore -file n0001_publickey.cer

@@ -22,7 +22,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
 		"classpath*:framework/spring/*-applicationContext.xml",
-		"classpath*:application/spring/*-applicationContext.xml" })
+		"classpath*:application/spring/*-applicationContext.xml"})
 public class InboundProcessorTest {
 
 	@Resource(name = "inboundProcessor")

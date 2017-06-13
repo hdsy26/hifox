@@ -2,11 +2,11 @@ package org.edf.hifox.security.signer.support;
 
 import java.io.InputStream;
 import java.security.Key;
-import java.security.KeyStore;
 import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.SecureRandom;
+import java.security.PublicKey;
 import java.security.Signature;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateFactory;
 
 import org.edf.hifox.core.exception.FailureException;
 import org.edf.hifox.core.util.SwapAreaUtil;
@@ -15,26 +15,23 @@ import org.edf.hifox.security.signer.Verifier;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
 
+import com.sun.org.apache.xml.internal.security.utils.Base64;
+
 public class DefaultVerigier implements Verifier, InitializingBean {
 	private String algorithm = "SHA1withDSA";
-	private KeyStore keyStore;
 	private Key key;
 	
 	private Resource resource;
-	private String charsetName;
-	private String alias;
-	private String storeType;
-	private String storePassword;
-	private SecureRandom secureRandom = new SecureRandom(new byte[]{});
+	private String charsetName = "UTF-8";
 
-
+	
 	@Override
 	public void update(byte[] input) {
 		try {
 			Signature signature = SwapAreaUtil.getSignatureObject();
 			if (signature == null) {
 				signature = Signature.getInstance(algorithm);
-				signature.initSign((PrivateKey)key, secureRandom);
+				signature.initVerify((PublicKey)key);
 				SwapAreaUtil.setSignatureObject(signature);
 			}
 			
@@ -57,10 +54,11 @@ public class DefaultVerigier implements Verifier, InitializingBean {
 	}
 	
 	@Override
-	public boolean verify(byte[] signValue) {
+	public boolean verify(byte[] signvalue) {
 		try {
 			Signature signature = SwapAreaUtil.getSignatureObject();
-			boolean result = signature.verify(signValue);
+			byte[] decode = Base64.decode(signvalue);
+			boolean result = signature.verify(decode);
 			return result;
 		} catch (Exception e) {
 			throw new FailureException(ErrorCodeConstant.E0001S072, new Object[]{e.getMessage()}, e);
@@ -68,9 +66,10 @@ public class DefaultVerigier implements Verifier, InitializingBean {
 	}
 
 	@Override
-	public boolean verify(String signValueString) {
+	public boolean verify(String signvalueString) {
 		try {
-			boolean result = verify(signValueString.getBytes(charsetName));
+			byte[] signValue = signvalueString.getBytes(charsetName);
+			boolean result = verify(signValue);
 			return result;
 		} catch (Exception e) {
 			throw new FailureException(ErrorCodeConstant.E0001S072, new Object[]{e.getMessage()}, e);
@@ -78,9 +77,9 @@ public class DefaultVerigier implements Verifier, InitializingBean {
 	}
 	
 	@Override
-	public boolean verify(String input, String signValueString) {
+	public boolean verify(String input, String signvalueString) {
 		update(input);
-		boolean result = verify(signValueString);
+		boolean result = verify(signvalueString);
 		return result;
 	}
 	
@@ -89,10 +88,10 @@ public class DefaultVerigier implements Verifier, InitializingBean {
 	public void afterPropertiesSet() throws Exception {
 		InputStream is = null;
 		try {
-			keyStore = KeyStore.getInstance(storeType);
+			CertificateFactory certificatefactory = CertificateFactory.getInstance("X.509");
 			is = resource.getInputStream();
-			keyStore.load(is, storePassword.toCharArray());
-			key = keyStore.getCertificate(alias).getPublicKey();
+			Certificate cer = certificatefactory.generateCertificate(is);
+			key = cer.getPublicKey();
 		} finally {
 			if (is != null)
 				is.close();
@@ -110,22 +109,6 @@ public class DefaultVerigier implements Verifier, InitializingBean {
 
 	public void setCharsetName(String charsetName) {
 		this.charsetName = charsetName;
-	}
-
-	public void setAlias(String alias) {
-		this.alias = alias;
-	}
-
-	public void setStoreType(String storeType) {
-		this.storeType = storeType;
-	}
-
-	public void setStorePassword(String storePassword) {
-		this.storePassword = storePassword;
-	}
-
-	public void setSecureRandom(SecureRandom secureRandom) {
-		this.secureRandom = secureRandom;
 	}
 
 }

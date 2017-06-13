@@ -7,16 +7,16 @@ public interface Verifier {
 	 * 公钥验签
 	 * @return
 	 */
-	boolean verify(byte[] signValue);
+	boolean verify(byte[] signvalue);
 	/**
 	 * 公钥验签
 	 * @return
 	 */
-	boolean verify(String signValueString);
+	boolean verify(String signvalueString);
 	
 	/**
 	 * 公钥验签
 	 * @return
 	 */
-	boolean verify(String input, String signValueString);
+	boolean verify(String input, String signvalueString);
 }

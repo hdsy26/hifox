@@ -274,4 +274,23 @@
 	</bean>
 	
 	
+	
+	
+	<!-- ===================== SHA1withDSA ===================== -->
+	<bean id="n0001-signer" class="org.edf.hifox.security.signer.support.DefaultSigner">
+		<property name="resource">
+			<value>classpath:application/keystore/n0001.keystore</value>
+		</property>
+		<property name="alias" value="n0001"/>
+		<property name="storeType" value="JKS" />
+		<property name="storePassword" value="storepass"/>
+		<property name="keyPassword" value="keypass"/>
+	</bean>
+	<bean id="n0001-verifier" class="org.edf.hifox.security.signer.support.DefaultVerigier">
+		<property name="resource">
+			<value>classpath:application/keystore/n0001_publickey.cer</value>
+		</property>
+	</bean>
+	<!-- =============================================== -->
+	
 </beans>
