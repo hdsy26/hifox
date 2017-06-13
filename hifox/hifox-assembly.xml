@@ -12,10 +12,10 @@
 		<dependencySet>
 			<unpack>true</unpack>
 			<scope>runtime</scope>
-			<!-- <includes>
+			<includes>
 				<include>org.edf:hifox-core:*</include>
 				<include>org.edf:hifox-security:*</include>
-			</includes> -->
+			</includes>
 		</dependencySet>
 	</dependencySets>
 	<fileSets>

@@ -26,7 +26,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- <dependency>
+		<dependency>
 			<groupId>org.edf</groupId>
 			<artifactId>hifox-security</artifactId>
 			<version>${project.parent.version}</version>
@@ -36,7 +36,7 @@
 					<groupId>*</groupId>
 				</exclusion>
 			</exclusions>
-		</dependency> -->
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -46,13 +46,9 @@
 				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
 					<appendAssemblyId>false</appendAssemblyId>
-					<!-- <descriptors> 
+					<descriptors>
 						<descriptor>hifox-assembly.xml</descriptor>
-					</descriptors> -->
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-					
+					</descriptors>
 				</configuration>
 				<executions>
 					<execution>
@@ -64,34 +60,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- <plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-						<configuration>
-							<createSourcesJar>true</createSourcesJar>
-							<promoteTransitiveDependencies>true</promoteTransitiveDependencies>
-							<artifactSet>
-								<includes>
-									<include>org.edf:hifox-core</include>
-									<include>org.edf:hifox-security</include>
-								</includes>
-							</artifactSet>
-							<transformers>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-									<resource></resource>
-								</transformer>
-							</transformers>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin> -->
 		</plugins>
 	</build>
 
