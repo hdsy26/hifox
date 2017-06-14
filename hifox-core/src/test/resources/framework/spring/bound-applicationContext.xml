@@ -45,7 +45,6 @@
 			<list>
 				<ref bean="outboundSwapAreaHandler"/>
 				<ref bean="outboundDataConvertHandler"/>
-				<ref bean="outboundSecurityHandler"/>
 				<ref bean="channelHandler"/>
 			</list>
 		</property>

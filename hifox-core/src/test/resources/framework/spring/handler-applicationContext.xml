@@ -45,8 +45,6 @@
 	
 	<bean name="outboundDataConvertHandler" class="org.edf.hifox.core.handler.outbound.OutboundDataConvertHandler" />
 	
-	<bean name="outboundSecurityHandler" class="org.edf.hifox.core.handler.outbound.OutboundSecurityHandler" />
-	
 	<bean id="defaultChannelInvoker" class="org.edf.hifox.core.invoker.DefaultChannelInvoker"
 		p:registry-ref="channelRegistry" />
 	<bean name="channelHandler" class="org.edf.hifox.core.handler.channel.ChannelHandler">
