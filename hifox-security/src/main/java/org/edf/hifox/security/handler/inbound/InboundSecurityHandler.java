@@ -35,8 +35,8 @@ public class InboundSecurityHandler implements Handler<InboundRequestInfo> {
 		
 		SecurityInfo info = DataConvertUtil.convert("node-security", decodedSecurityInfoString);
 		
-		if (SecurityConstant.SECURITY_MODE_SIGN.equals(info.getMode())) {
-			Verifier verifier = SpringContextUtil.getBean(reqNodeId + "-verifier", Verifier.class);
+		if (SecurityConstant.SECURITY_MESSAGE_MODE_SIGN.equals(info.getMode())) {
+			Verifier verifier = SpringContextUtil.getBean(reqNodeId + SecurityConstant.SECURITY_MESSAGE_VERIFIER_SUFFIX, Verifier.class);
 			if (verifier == null)
 				throw new FailureException(ErrorCodeConstant.E0001S050, new Object[]{reqNodeId});
 			
@@ -45,8 +45,8 @@ public class InboundSecurityHandler implements Handler<InboundRequestInfo> {
 			if (!verifier.verify(info.getSignature()))
 				throw new FailureException(ErrorCodeConstant.E0001S050, new Object[]{reqNodeId});
 			
-		} else if (SecurityConstant.SECURITY_MODE_ENCRYPT.equals(info.getMode())){
-			Decipher decipher = SpringContextUtil.getBean(reqNodeId + "-decipher", Decipher.class);
+		} else if (SecurityConstant.SECURITY_MESSAGE_MODE_ENCRYPT.equals(info.getMode())){
+			Decipher decipher = SpringContextUtil.getBean(reqNodeId + SecurityConstant.SECURITY_MESSAGE_DECIPHER_SUFFIX, Decipher.class);
 			if (decipher == null)
 				throw new FailureException(ErrorCodeConstant.E0001S050, new Object[]{reqNodeId});
 			

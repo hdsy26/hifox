@@ -15,10 +15,6 @@ public class SecurityInfo {
 	@XmlElement(name="mode")
 	private String mode;
 	
-	@XStreamAlias("encipherChainObjectUniqueMark")
-	@XmlElement(name="encipherChainObjectUniqueMark")
-	private String encipherChainObjectUniqueMark;
-	
 	@XStreamAlias("signature")
 	@XmlElement(name="signature")
 	private String signature;
@@ -26,19 +22,15 @@ public class SecurityInfo {
 	public String getMode() {
 		return mode;
 	}
+	
 	public void setMode(String mode) {
 		this.mode = mode;
 	}
-	public String getEncipherChainObjectUniqueMark() {
-		return encipherChainObjectUniqueMark;
-	}
-	public void setEncipherChainObjectUniqueMark(
-			String encipherChainObjectUniqueMark) {
-		this.encipherChainObjectUniqueMark = encipherChainObjectUniqueMark;
-	}
+	
 	public String getSignature() {
 		return signature;
 	}
+	
 	public void setSignature(String signature) {
 		this.signature = signature;
 	}
