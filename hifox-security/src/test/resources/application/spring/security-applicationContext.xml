@@ -20,7 +20,7 @@
 		</property>
 		<property name="alias" value="ca_rsa"/>
 		<property name="storeType" value="JKS" />
-		<property name="storePassword" value="storepass"/>
+		<property name="storePassword" value="${rsa.store.password}"/>
 	</bean>
 	<bean id="rsaDecipher" class="org.edf.hifox.security.cipher.support.RsaDecipher">
 		<property name="resource">
@@ -28,8 +28,8 @@
 		</property>
 		<property name="alias" value="ca_rsa"/>
 		<property name="storeType" value="JKS" />
-		<property name="storePassword" value="storepass"/>
-		<property name="keyPassword" value="keypass"/>
+		<property name="storePassword" value="${rsa.store.password}"/>
+		<property name="keyPassword" value="{rsa.key.password}"/>
 	</bean>
 	<!-- =============================================== -->
 	
@@ -41,8 +41,8 @@
 		</property>
 		<property name="alias" value="ca_des"/>
 		<property name="storeType" value="JCEKS" />
-		<property name="storePassword" value="storepass"/>
-		<property name="keyPassword" value="keypass"/>
+		<property name="storePassword" value="${des.store.password}"/>
+		<property name="keyPassword" value="${des.key.password}"/>
 	</bean>
 	<bean id="desDecipher" class="org.edf.hifox.security.cipher.support.DesDecipher">
 		<property name="resource">
@@ -50,8 +50,8 @@
 		</property>
 		<property name="alias" value="ca_des"/>
 		<property name="storeType" value="JCEKS" />
-		<property name="storePassword" value="storepass"/>
-		<property name="keyPassword" value="keypass"/>
+		<property name="storePassword" value="${des.store.password}"/>
+		<property name="keyPassword" value="${des.key.password}"/>
 	</bean>
 	<!-- =============================================== -->
 	
@@ -63,8 +63,8 @@
 		</property>
 		<property name="alias" value="ca_aes"/>
 		<property name="storeType" value="JCEKS" />
-		<property name="storePassword" value="storepass"/>
-		<property name="keyPassword" value="keypass"/>
+		<property name="storePassword" value="${aes.store.password}"/>
+		<property name="keyPassword" value="${aes.key.password}"/>
 	</bean>
 	<bean id="aesDecipher" class="org.edf.hifox.security.cipher.support.AesDecipher">
 		<property name="resource">
@@ -72,8 +72,8 @@
 		</property>
 		<property name="alias" value="ca_aes"/>
 		<property name="storeType" value="JCEKS" />
-		<property name="storePassword" value="storepass"/>
-		<property name="keyPassword" value="keypass"/>
+		<property name="storePassword" value="${aes.store.password}"/>
+		<property name="keyPassword" value="${aes.key.password}"/>
 	</bean>
 	<!-- =============================================== -->
 	
