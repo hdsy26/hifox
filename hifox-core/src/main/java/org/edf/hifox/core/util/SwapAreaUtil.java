@@ -1,5 +1,6 @@
 package org.edf.hifox.core.util;
 
+import java.security.MessageDigest;
 import java.security.Signature;
 import java.util.Map;
 
@@ -300,6 +301,14 @@ public final class SwapAreaUtil {
 	
 	public static void setSignatureObject(Signature signature) {
 		setValue(SwapAreaConstant.SIGNATURE_OBJECT, signature);
+	}
+	
+	public static MessageDigest getMessageDigestObject() {
+		return getValue(SwapAreaConstant.SIGNATURE_OBJECT, MessageDigest.class);
+	}
+	
+	public static void setMessageDigestObject(MessageDigest messageDigest) {
+		setValue(SwapAreaConstant.SIGNATURE_OBJECT, messageDigest);
 	}
 
 }

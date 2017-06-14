@@ -47,5 +47,10 @@ public class ErrorCodeConstant {
 	 */
 	public static final String E0001S051 = "E0001S051";
 	
+	/**
+	 * 不支持字符编码:{0}!
+	 */
+	public static final String E0001S060 = "E0001S060";
+	
 	
 }

@@ -10,6 +10,8 @@ import java.security.SignatureException;
 
 import org.apache.commons.codec.binary.Base64;
 import org.edf.hifox.core.exception.FailureException;
+import org.edf.hifox.core.util.ByteArrayUtil;
+import org.edf.hifox.core.util.StringUtil;
 import org.edf.hifox.core.util.SwapAreaUtil;
 import org.edf.hifox.security.constant.ErrorCodeConstant;
 import org.edf.hifox.security.signer.Signer;
@@ -50,11 +52,7 @@ public class DefaultSigner implements Signer, InitializingBean {
 	
 	@Override
 	public void update(String input) {
-		try {
-			update(input.getBytes(charsetName));
-		} catch (Exception e) {
-			throw new FailureException(ErrorCodeConstant.E0001S071, new Object[]{e.getMessage()}, e);
-		}
+		update(StringUtil.toBytes(input, charsetName));
 	}
 	
 
@@ -73,12 +71,8 @@ public class DefaultSigner implements Signer, InitializingBean {
 	
 	@Override
 	public String signString() {
-		try {
-			String encodeString  = new String(sign(), charsetName);
-			return encodeString;
-		} catch (Exception e) {
-			throw new FailureException(ErrorCodeConstant.E0001S071, new Object[]{e.getMessage()}, e);
-		}
+		String encodeString  = ByteArrayUtil.toString(sign(), charsetName);
+		return encodeString;
 	}
 	
 	@Override

@@ -32,4 +32,9 @@ public class ErrorCodeConstant {
 	 */
 	public static final String E0001S072 = "E0001S072";
 	
+	/**
+	 * 摘要失败:{0}!
+	 */
+	public static final String E0001S081 = "E0001S081";
+	
 }

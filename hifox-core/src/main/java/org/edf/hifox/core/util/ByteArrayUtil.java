@@ -1,6 +1,10 @@
 package org.edf.hifox.core.util;
 
+import java.io.UnsupportedEncodingException;
+
 import org.apache.http.util.ByteArrayBuffer;
+import org.edf.hifox.core.constant.ErrorCodeConstant;
+import org.edf.hifox.core.exception.FailureException;
 
 /**
  * 
@@ -24,6 +28,20 @@ public final class ByteArrayUtil {
 		}
 		
 		return byteArrayBuffer.toByteArray();
+	}
+	
+	public static String toString(byte[] input, String charsetName) {
+		try {
+			if (input == null)
+				return null;
+
+			if (charsetName == null)
+				return new String(input);
+
+			return new String(input, charsetName);
+		} catch (UnsupportedEncodingException e) {
+			throw new FailureException(ErrorCodeConstant.E0001S060, new Object[] { charsetName }, e);
+		}
 	}
 
 }

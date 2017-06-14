@@ -1,11 +1,9 @@
-package org.edf.hifox.security.signer.support;
+package org.edf.hifox.security.support;
 
 import javax.annotation.Resource;
 
 import org.edf.hifox.core.editor.ClassEditor;
-import org.edf.hifox.core.util.SwapAreaUtil;
-import org.edf.hifox.security.signer.Signer;
-import org.edf.hifox.security.signer.Verifier;
+import org.edf.hifox.security.cipher.Encipher;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,13 +14,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations={
 		"classpath*:framework/spring/*-applicationContext.xml",
 		"classpath*:application/spring/*-applicationContext.xml"})
-public class DefaultSignerVerifierTest {
+public class DefaultDigesterTest {
 	
-	@Resource(name = "n0001-signer")
-	private Signer signer;
-	
-	@Resource(name = "n0001-verifier")
-	private Verifier verifier;
+	@Resource(name = "md5Encipher")
+	private Encipher encipher;
 
 	@SuppressWarnings("unchecked")
 	@BeforeClass
@@ -34,14 +29,13 @@ public class DefaultSignerVerifierTest {
 	}
 
 	@Test
-	public void testSignVerifyString() {
-		String signString = signer.signString("abcd你好abcd你好");
-		System.out.println("sign:" + signString);
+	public void testEncryptString() {
+		long time = System.currentTimeMillis();
 		
-		SwapAreaUtil.releaseCurrentSwapArea();
+		String str = encipher.encrypt("abcd你好abcd你好");
+		System.out.println("encrypt:" + str);
 		
-		boolean result = verifier.verify("abcd你好abcd你好", signString);
-		System.out.println("verify:" + result);
+		System.out.println("time:" + (System.currentTimeMillis() - time));
 	}
 
 }

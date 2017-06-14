@@ -50,12 +50,8 @@ public class DefaultChainSelector implements ChainSelector, InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		if (this.defaultChain == null) {
-			throw new NullPointerException("defaultChain is null!");
-		}
-
 		if (this.expressionParser == null) {
-			throw new NullPointerException("defaultChain is null!");
+			throw new NullPointerException("expressionParser is null!");
 		}
 	}
 

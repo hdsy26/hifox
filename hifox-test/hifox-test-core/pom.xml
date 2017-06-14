@@ -11,14 +11,15 @@
 	<name>${project.artifactId}</name>
 	<description>The admin module of hifox-test-core project</description>
 	<properties>
-		<wtpversion>1.6</wtpversion>
-		<wtpContextName>/</wtpContextName>
-		<eclipse.useProjectReferences>false</eclipse.useProjectReferences>
-		<skip_maven_deploy>false</skip_maven_deploy>
+	
 	</properties>
 
 	<dependencies>
-
+		<dependency>
+			<groupId>org.edf</groupId>
+			<artifactId>hifox</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>

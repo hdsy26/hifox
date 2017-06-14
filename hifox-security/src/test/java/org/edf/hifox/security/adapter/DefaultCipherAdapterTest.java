@@ -175,5 +175,37 @@ public class DefaultCipherAdapterTest {
 		
 		System.out.println("decrypt:" + str);
 	}
+	
+	@Test
+	public void testEncrypt_MD5() {
+		A000S000Req req = new A000S000Req();
+		req.setDatetime(DateFormatUtils.format(new Date(), "yyyyMMdd"));
+		req.setText("abcd你好");
+		req.setType("MD5");
+		Message<RequestHead, Body> reqMsg = new RequestMessage();
+		reqMsg.setBody(req);
+		
+		SwapAreaUtil.setInboundRequestMessage(reqMsg);
+		
+		String str = cipherAdapter.encrypt(req.getText());
+		
+		System.out.println("encrypt:" + str);
+	}
+	
+	@Test
+	public void testEncrypt_SHA256() {
+		A000S000Req req = new A000S000Req();
+		req.setDatetime(DateFormatUtils.format(new Date(), "yyyyMMdd"));
+		req.setText("abcd你好");
+		req.setType("SHA256");
+		Message<RequestHead, Body> reqMsg = new RequestMessage();
+		reqMsg.setBody(req);
+		
+		SwapAreaUtil.setInboundRequestMessage(reqMsg);
+		
+		String str = cipherAdapter.encrypt(req.getText());
+		
+		System.out.println("encrypt:" + str);
+	}
 
 }

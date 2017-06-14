@@ -33,6 +33,7 @@ public class SwapAreaConstant {
 	public static final String ENCRYPTED_RANDOMKEY = "['_encrypted_randomkey']";
 	
 	public static final String SIGNATURE_OBJECT = "['_signature_object']";
+	public static final String MESSAGE_DIGEST_OBJECT = "['_message_digest_object']";
 	
 	
 }

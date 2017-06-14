@@ -9,6 +9,7 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateFactory;
 
 import org.edf.hifox.core.exception.FailureException;
+import org.edf.hifox.core.util.StringUtil;
 import org.edf.hifox.core.util.SwapAreaUtil;
 import org.edf.hifox.security.constant.ErrorCodeConstant;
 import org.edf.hifox.security.signer.Verifier;
@@ -46,11 +47,7 @@ public class DefaultVerigier implements Verifier, InitializingBean {
 	
 	@Override
 	public void update(String input) {
-		try {
-			update(input.getBytes(charsetName));
-		} catch (Exception e) {
-			throw new FailureException(ErrorCodeConstant.E0001S072, new Object[]{e.getMessage()}, e);
-		}
+		update(StringUtil.toBytes(input, charsetName));
 	}
 	
 	@Override
@@ -67,13 +64,9 @@ public class DefaultVerigier implements Verifier, InitializingBean {
 
 	@Override
 	public boolean verify(String signvalueString) {
-		try {
-			byte[] signValue = signvalueString.getBytes(charsetName);
-			boolean result = verify(signValue);
-			return result;
-		} catch (Exception e) {
-			throw new FailureException(ErrorCodeConstant.E0001S072, new Object[]{e.getMessage()}, e);
-		}
+		byte[] signValue = StringUtil.toBytes(signvalueString, charsetName);
+		boolean result = verify(signValue);
+		return result;
 	}
 	
 	@Override

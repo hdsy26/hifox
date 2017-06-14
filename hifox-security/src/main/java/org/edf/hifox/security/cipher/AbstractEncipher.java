@@ -10,6 +10,8 @@ import javax.crypto.Cipher;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.edf.hifox.core.exception.FailureException;
+import org.edf.hifox.core.util.ByteArrayUtil;
+import org.edf.hifox.core.util.StringUtil;
 import org.edf.hifox.security.constant.ErrorCodeConstant;
 import org.edf.hifox.security.meta.CipherMetainfo;
 import org.springframework.beans.factory.InitializingBean;
@@ -54,16 +56,11 @@ public abstract class AbstractEncipher implements Encipher, InitializingBean {
 
 	@Override
 	public String encrypt(String input) {
-		try {
-			byte[] encryptedEncoded = encrypt(input.getBytes(charsetName));
-			
-			String encryptedEncodedString = new String(encryptedEncoded, charsetName);
-			
-			return encryptedEncodedString;
-			
-		} catch (Exception e) {
-			throw new FailureException(ErrorCodeConstant.E0001S060, new Object[]{e.getMessage()}, e);
-		}
+		byte[] encryptedEncoded = encrypt(StringUtil.toBytes(input, charsetName));
+		
+		String encryptedEncodedString = ByteArrayUtil.toString(encryptedEncoded, charsetName);
+		
+		return encryptedEncodedString;
 	}
 	
 	@Override

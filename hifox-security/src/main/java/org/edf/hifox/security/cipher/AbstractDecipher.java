@@ -10,6 +10,8 @@ import javax.crypto.Cipher;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.edf.hifox.core.exception.FailureException;
+import org.edf.hifox.core.util.ByteArrayUtil;
+import org.edf.hifox.core.util.StringUtil;
 import org.edf.hifox.security.constant.ErrorCodeConstant;
 import org.edf.hifox.security.meta.CipherMetainfo;
 import org.springframework.beans.factory.InitializingBean;
@@ -54,16 +56,11 @@ public abstract class AbstractDecipher implements Decipher, InitializingBean {
 
 	@Override
 	public String decrypt(String input) {
-		try {
-			byte[] decodedDecrypted = decrypt(input.getBytes(charsetName));
-			
-			String decodedDecryptedString = new String(decodedDecrypted, charsetName);
-			
-			return decodedDecryptedString;
-			
-		} catch (Exception e) {
-			throw new FailureException(ErrorCodeConstant.E0001S061, new Object[]{e.getMessage()}, e);
-		}
+		byte[] decodedDecrypted = decrypt(StringUtil.toBytes(input, charsetName));
+		
+		String decodedDecryptedString = ByteArrayUtil.toString(decodedDecrypted, charsetName);
+		
+		return decodedDecryptedString;
 	}
 	
 	@Override

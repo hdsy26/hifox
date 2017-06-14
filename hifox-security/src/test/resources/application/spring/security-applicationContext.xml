@@ -102,6 +102,20 @@
 	<!-- ========================================================= -->
 	
 	
+	<!-- ===================== MD5 ===================== -->
+	<bean id="md5Encipher" class="org.edf.hifox.security.cipher.support.DefaultDigester">
+		<property name="algorithm" value="MD5"/>
+	</bean>
+	<!-- ======================================================= -->
+	
+	
+	<!-- ===================== SHA-256 ===================== -->
+	<bean id="sha256Encipher" class="org.edf.hifox.security.cipher.support.DefaultDigester">
+		<property name="algorithm" value="SHA-256"/>
+	</bean>
+	<!-- ======================================================= -->
+	
+	
 	
 	
 	<!-- ===================== RSA-CHAIN ===================== -->
@@ -234,10 +248,33 @@
 	<!-- =============================================================== -->
 	
 	
+	
+	
+	<!-- ===================== MD5-CHAIN ===================== -->
+	<bean id="md5-encipher-chain" class="org.edf.hifox.core.chain.HandlerChain">
+		<property name="handlerList">
+			<list>
+				<bean class="org.edf.hifox.security.handler.EncipherHandler" p:encipher-ref="md5Encipher"/>
+			</list>
+		</property>
+	</bean>
+	<!-- ========================================================= -->
+	
+	
+	<!-- ===================== SHA256-CHAIN ===================== -->
+	<bean id="sha256-encipher-chain" class="org.edf.hifox.core.chain.HandlerChain">
+		<property name="handlerList">
+			<list>
+				<bean class="org.edf.hifox.security.handler.EncipherHandler" p:encipher-ref="sha256Encipher"/>
+			</list>
+		</property>
+	</bean>
+	<!-- ========================================================= -->
+	
+	
 	<bean id="encipherChainSelector"
 		class="org.edf.hifox.core.chain.selector.DefaultChainSelector"
-		p:expressionParser-ref="expressionParser"
-		p:defaultChain-ref="rsa-des-encipher-chain">
+		p:expressionParser-ref="expressionParser">
 		<constructor-arg>
 			<map>
 				<entry key="type == 'RSA'" value-ref="rsa-encipher-chain" />
@@ -247,13 +284,14 @@
 				<entry key="type == 'DES-AES'" value-ref="des-aes-encipher-chain" />
 				<entry key="type == 'DES-RANDOMKEY'" value-ref="des-randomkey-encipher-chain" />
 				<entry key="type == 'AES-RANDOMKEY'" value-ref="aes-randomkey-encipher-chain" />
+				<entry key="type == 'MD5'" value-ref="md5-encipher-chain" />
+				<entry key="type == 'SHA256'" value-ref="sha256-encipher-chain" />
 			</map>
 		</constructor-arg>
 	</bean>
 	<bean id="decipherChainSelector"
 		class="org.edf.hifox.core.chain.selector.DefaultChainSelector"
-		p:expressionParser-ref="expressionParser"
-		p:defaultChain-ref="des-rsa-decipher-chain">
+		p:expressionParser-ref="expressionParser">
 		<constructor-arg>
 			<map>
 				<entry key="#this == 'rsa-encipher-chain'" value-ref="rsa-decipher-chain" />
@@ -291,6 +329,6 @@
 			<value>classpath:application/keystore/n0001_publickey.cer</value>
 		</property>
 	</bean>
-	<!-- =============================================== -->
+	<!-- ======================================================= -->
 	
 </beans>
