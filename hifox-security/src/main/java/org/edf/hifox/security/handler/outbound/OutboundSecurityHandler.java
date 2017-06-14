@@ -1,4 +1,4 @@
-package org.edf.hifox.core.handler.outbound;
+package org.edf.hifox.security.handler.outbound;
 
 import java.util.Map;
 
