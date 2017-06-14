@@ -1,4 +1,4 @@
-package org.edf.hifox.security.support;
+package org.edf.hifox.security.cipher.support;
 
 import javax.annotation.Resource;
 

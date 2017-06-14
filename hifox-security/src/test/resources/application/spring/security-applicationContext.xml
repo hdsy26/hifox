@@ -29,7 +29,7 @@
 		<property name="alias" value="ca_rsa"/>
 		<property name="storeType" value="JKS" />
 		<property name="storePassword" value="${rsa.store.password}"/>
-		<property name="keyPassword" value="{rsa.key.password}"/>
+		<property name="keyPassword" value="${rsa.key.password}"/>
 	</bean>
 	<!-- =============================================== -->
 	
