@@ -7,4 +7,5 @@ package org.edf.hifox.core.constant;
  */
 public class SysParamConstant {
 	public static final String LINE_SEPARATOR = System.getProperty("line.separator", "\n");
+	public static final String LINE_SEPARATOR_FIXED = "\n";
 }
