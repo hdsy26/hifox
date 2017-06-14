@@ -8,6 +8,11 @@ package org.edf.hifox.security.constant;
 public class ErrorCodeConstant {
 	
 	/**
+	 * 请求方未认证:{0}!
+	 */
+	public static final String E0001S050 = "E0001S050";
+	
+	/**
 	 * 加密失败:{0}!
 	 */
 	public static final String E0001S060 = "E0001S060";
@@ -36,5 +41,6 @@ public class ErrorCodeConstant {
 	 * 摘要失败:{0}!
 	 */
 	public static final String E0001S081 = "E0001S081";
+	
 	
 }

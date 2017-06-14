@@ -11,4 +11,7 @@ public class SecurityConstant {
 	public static final String OBJECT_PREFIX = "	";
 	public static final String OBJECT_UNIQUE_MARK_CHARSET_NAME = "UTF-8";
 	
+	public static final String SECURITY_MODE_SIGN = "SIGN";
+	public static final String SECURITY_MODE_ENCRYPT = "ENCRYPT";
+	
 }

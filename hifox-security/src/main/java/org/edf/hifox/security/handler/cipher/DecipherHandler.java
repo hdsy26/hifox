@@ -1,4 +1,4 @@
-package org.edf.hifox.security.handler;
+package org.edf.hifox.security.handler.cipher;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;

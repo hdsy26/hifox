@@ -62,17 +62,15 @@ public class InboundProcessor implements Processor<byte[], InboundRequestInfo> {
 
 			logger.info(LogCodeConstant.SYS00002, new Object[] {contentString});
 			
-			if ("".equals(data.getReqNodeId())) {
-				contentString = StringUtils.substringBeforeLast(contentString, SysParamConstant.LINE_SEPARATOR_FIXED);
-				
-				String signature = StringUtils.substringAfterLast(contentString, SysParamConstant.LINE_SEPARATOR_FIXED);
-				
-				data.setContent(StringUtil.toBytes(contentString, data.getAgreedRequestEncoding()));
-				data.setContentString(contentString);
-				data.setSignature(signature);
-			}
-
+			// 安全信息
+			String securityInfo = StringUtils.substringBefore(contentString, SysParamConstant.LINE_SEPARATOR_FIXED);
+			
+			// 业务信息
+			contentString = StringUtils.substringAfter(contentString, SysParamConstant.LINE_SEPARATOR_FIXED);
+			
+			data.setContent(StringUtil.toBytes(contentString, data.getAgreedRequestEncoding()));
 			data.setContentString(contentString);
+			data.setSecurityInfo(securityInfo);
 
 			Document document = DocumentHelper.parseText(data.getContentString());
 			Node reqNodeIdNode = document.selectSingleNode(reqNodeIdPath);

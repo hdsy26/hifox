@@ -17,7 +17,8 @@ public class InboundRequestInfo {
 	private int remotePort;
 	private byte[] content;
 	private String contentString;
-	private String signature;
+	private String securityInfo;
+	private String objectMark;
 	private String agreedRequestEncoding;
 	private String agreedResponseEncoding;
 	private String reqNodeId;
@@ -67,8 +68,20 @@ public class InboundRequestInfo {
 		this.contentString = contentString;
 	}
 
-	public void setSignature(String signature) {
-		this.signature = signature;
+	public String getSecurityInfo() {
+		return securityInfo;
+	}
+
+	public void setSecurityInfo(String securityInfo) {
+		this.securityInfo = securityInfo;
+	}
+
+	public String getObjectMark() {
+		return objectMark;
+	}
+
+	public void setObjectMark(String objectMark) {
+		this.objectMark = objectMark;
 	}
 
 	public String getAgreedRequestEncoding() {

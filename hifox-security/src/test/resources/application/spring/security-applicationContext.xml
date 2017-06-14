@@ -122,14 +122,14 @@
 	<bean id="rsa-encipher-chain" class="org.edf.hifox.core.chain.HandlerChain">
 		<property name="handlerList">
 			<list>
-				<bean class="org.edf.hifox.security.handler.EncipherHandler" p:encipher-ref="rsaEncipher"/>
+				<bean class="org.edf.hifox.security.handler.cipher.EncipherHandler" p:encipher-ref="rsaEncipher"/>
 			</list>
 		</property>
 	</bean>
 	<bean id="rsa-decipher-chain" class="org.edf.hifox.core.chain.HandlerChain">
 		<property name="handlerList">
 			<list>
-				<bean class="org.edf.hifox.security.handler.DecipherHandler" p:decipher-ref="rsaDecipher"/>
+				<bean class="org.edf.hifox.security.handler.cipher.DecipherHandler" p:decipher-ref="rsaDecipher"/>
 			</list>
 		</property>
 	</bean>
@@ -140,14 +140,14 @@
 	<bean id="des-encipher-chain" class="org.edf.hifox.core.chain.HandlerChain">
 		<property name="handlerList">
 			<list>
-				<bean class="org.edf.hifox.security.handler.EncipherHandler" p:encipher-ref="desEncipher"/>
+				<bean class="org.edf.hifox.security.handler.cipher.EncipherHandler" p:encipher-ref="desEncipher"/>
 			</list>
 		</property>
 	</bean>
 	<bean id="des-decipher-chain" class="org.edf.hifox.core.chain.HandlerChain">
 		<property name="handlerList">
 			<list>
-				<bean class="org.edf.hifox.security.handler.DecipherHandler" p:decipher-ref="desDecipher"/>
+				<bean class="org.edf.hifox.security.handler.cipher.DecipherHandler" p:decipher-ref="desDecipher"/>
 			</list>
 		</property>
 	</bean>
@@ -158,14 +158,14 @@
 	<bean id="aes-encipher-chain" class="org.edf.hifox.core.chain.HandlerChain">
 		<property name="handlerList">
 			<list>
-				<bean class="org.edf.hifox.security.handler.EncipherHandler" p:encipher-ref="aesEncipher"/>
+				<bean class="org.edf.hifox.security.handler.cipher.EncipherHandler" p:encipher-ref="aesEncipher"/>
 			</list>
 		</property>
 	</bean>
 	<bean id="aes-decipher-chain" class="org.edf.hifox.core.chain.HandlerChain">
 		<property name="handlerList">
 			<list>
-				<bean class="org.edf.hifox.security.handler.DecipherHandler" p:decipher-ref="aesDecipher"/>
+				<bean class="org.edf.hifox.security.handler.cipher.DecipherHandler" p:decipher-ref="aesDecipher"/>
 			</list>
 		</property>
 	</bean>
@@ -176,16 +176,16 @@
 	<bean id="rsa-des-encipher-chain" class="org.edf.hifox.core.chain.HandlerChain">
 		<property name="handlerList">
 			<list>
-				<bean class="org.edf.hifox.security.handler.EncipherHandler" p:encipher-ref="rsaEncipher"/>
-				<bean class="org.edf.hifox.security.handler.EncipherHandler" p:encipher-ref="desEncipher"/>
+				<bean class="org.edf.hifox.security.handler.cipher.EncipherHandler" p:encipher-ref="rsaEncipher"/>
+				<bean class="org.edf.hifox.security.handler.cipher.EncipherHandler" p:encipher-ref="desEncipher"/>
 			</list>
 		</property>
 	</bean>
 	<bean id="des-rsa-decipher-chain" class="org.edf.hifox.core.chain.HandlerChain">
 		<property name="handlerList">
 			<list>
-				<bean class="org.edf.hifox.security.handler.DecipherHandler" p:decipher-ref="desDecipher"/>
-				<bean class="org.edf.hifox.security.handler.DecipherHandler" p:decipher-ref="rsaDecipher"/>
+				<bean class="org.edf.hifox.security.handler.cipher.DecipherHandler" p:decipher-ref="desDecipher"/>
+				<bean class="org.edf.hifox.security.handler.cipher.DecipherHandler" p:decipher-ref="rsaDecipher"/>
 			</list>
 		</property>
 	</bean>
@@ -196,16 +196,16 @@
 	<bean id="des-aes-encipher-chain" class="org.edf.hifox.core.chain.HandlerChain">
 		<property name="handlerList">
 			<list>
-				<bean class="org.edf.hifox.security.handler.EncipherHandler" p:encipher-ref="desEncipher"/>
-				<bean class="org.edf.hifox.security.handler.EncipherHandler" p:encipher-ref="aesEncipher"/>
+				<bean class="org.edf.hifox.security.handler.cipher.EncipherHandler" p:encipher-ref="desEncipher"/>
+				<bean class="org.edf.hifox.security.handler.cipher.EncipherHandler" p:encipher-ref="aesEncipher"/>
 			</list>
 		</property>
 	</bean>
 	<bean id="aes-des-decipher-chain" class="org.edf.hifox.core.chain.HandlerChain">
 		<property name="handlerList">
 			<list>
-				<bean class="org.edf.hifox.security.handler.DecipherHandler" p:decipher-ref="aesDecipher"/>
-				<bean class="org.edf.hifox.security.handler.DecipherHandler" p:decipher-ref="desDecipher"/>
+				<bean class="org.edf.hifox.security.handler.cipher.DecipherHandler" p:decipher-ref="aesDecipher"/>
+				<bean class="org.edf.hifox.security.handler.cipher.DecipherHandler" p:decipher-ref="desDecipher"/>
 			</list>
 		</property>
 	</bean>
@@ -216,14 +216,14 @@
 	<bean id="des-randomkey-encipher-chain" class="org.edf.hifox.core.chain.HandlerChain">
 		<property name="handlerList">
 			<list>
-				<bean class="org.edf.hifox.security.handler.EncipherHandler" p:encipher-ref="desRandomkeyEncipher"/>
+				<bean class="org.edf.hifox.security.handler.cipher.EncipherHandler" p:encipher-ref="desRandomkeyEncipher"/>
 			</list>
 		</property>
 	</bean>
 	<bean id="des-randomkey-decipher-chain" class="org.edf.hifox.core.chain.HandlerChain">
 		<property name="handlerList">
 			<list>
-				<bean class="org.edf.hifox.security.handler.DecipherHandler" p:decipher-ref="desRandomkeyDecipher"/>
+				<bean class="org.edf.hifox.security.handler.cipher.DecipherHandler" p:decipher-ref="desRandomkeyDecipher"/>
 			</list>
 		</property>
 	</bean>
@@ -234,14 +234,14 @@
 	<bean id="aes-randomkey-encipher-chain" class="org.edf.hifox.core.chain.HandlerChain">
 		<property name="handlerList">
 			<list>
-				<bean class="org.edf.hifox.security.handler.EncipherHandler" p:encipher-ref="aesRandomkeyEncipher"/>
+				<bean class="org.edf.hifox.security.handler.cipher.EncipherHandler" p:encipher-ref="aesRandomkeyEncipher"/>
 			</list>
 		</property>
 	</bean>
 	<bean id="aes-randomkey-decipher-chain" class="org.edf.hifox.core.chain.HandlerChain">
 		<property name="handlerList">
 			<list>
-				<bean class="org.edf.hifox.security.handler.DecipherHandler" p:decipher-ref="aesRandomkeyDecipher"/>
+				<bean class="org.edf.hifox.security.handler.cipher.DecipherHandler" p:decipher-ref="aesRandomkeyDecipher"/>
 			</list>
 		</property>
 	</bean>
@@ -254,7 +254,7 @@
 	<bean id="md5-encipher-chain" class="org.edf.hifox.core.chain.HandlerChain">
 		<property name="handlerList">
 			<list>
-				<bean class="org.edf.hifox.security.handler.EncipherHandler" p:encipher-ref="md5Encipher"/>
+				<bean class="org.edf.hifox.security.handler.cipher.EncipherHandler" p:encipher-ref="md5Encipher"/>
 			</list>
 		</property>
 	</bean>
@@ -265,7 +265,7 @@
 	<bean id="sha256-encipher-chain" class="org.edf.hifox.core.chain.HandlerChain">
 		<property name="handlerList">
 			<list>
-				<bean class="org.edf.hifox.security.handler.EncipherHandler" p:encipher-ref="sha256Encipher"/>
+				<bean class="org.edf.hifox.security.handler.cipher.EncipherHandler" p:encipher-ref="sha256Encipher"/>
 			</list>
 		</property>
 	</bean>
@@ -330,5 +330,27 @@
 		</property>
 	</bean>
 	<!-- ======================================================= -->
+	
+	
+	<!-- ===================== MESSAGE DES ===================== -->
+	<bean id="n0002-encipher" class="org.edf.hifox.security.cipher.support.DesEncipher">
+		<property name="resource">
+			<value>classpath:application/keystore/n0002.keystore</value>
+		</property>
+		<property name="alias" value="n0002"/>
+		<property name="storeType" value="JCEKS" />
+		<property name="storePassword" value="${des.store.password}"/>
+		<property name="keyPassword" value="${des.key.password}"/>
+	</bean>
+	<bean id="n0002-decipher" class="org.edf.hifox.security.cipher.support.DesDecipher">
+		<property name="resource">
+			<value>classpath:application/keystore/n0002.keystore</value>
+		</property>
+		<property name="alias" value="n0002"/>
+		<property name="storeType" value="JCEKS" />
+		<property name="storePassword" value="${des.store.password}"/>
+		<property name="keyPassword" value="${des.key.password}"/>
+	</bean>
+	<!-- =============================================== -->
 	
 </beans>
