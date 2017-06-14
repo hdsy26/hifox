@@ -11,7 +11,6 @@
 	<bean id="httpServiceInboundChain" class="org.edf.hifox.core.chain.HandlerChain">
 		<property name="handlerList">
 			<list>
-				<ref bean="inboundSecurityHandler"/>
 				<ref bean="inboundExceptionHandler"/>
 				<ref bean="inboundDataConvertHandler"/>
 				<ref bean="inboundSwapAreaHandler"/>

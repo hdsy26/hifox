@@ -9,8 +9,6 @@
 		http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 	
 	<!-- ==================================== inbound-handler ==================================== -->
-	<bean name="inboundSecurityHandler" class="org.edf.hifox.core.handler.inbound.InboundSecurityHandler" />
-	
 	<bean name="inboundExceptionHandler" class="org.edf.hifox.core.handler.inbound.InboundExceptionHandler" />
 	
 	<bean name="inboundDataConvertHandler" class="org.edf.hifox.core.handler.inbound.InboundDataConvertHandler" />
