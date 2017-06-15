@@ -8,6 +8,7 @@ import java.security.Signature;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateFactory;
 
+import org.apache.commons.codec.binary.Base64;
 import org.edf.hifox.core.exception.FailureException;
 import org.edf.hifox.core.util.StringUtil;
 import org.edf.hifox.core.util.SwapAreaUtil;
@@ -15,8 +16,6 @@ import org.edf.hifox.security.constant.ErrorCodeConstant;
 import org.edf.hifox.security.signer.Verifier;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
-
-import com.sun.org.apache.xml.internal.security.utils.Base64;
 
 public class DefaultVerigier implements Verifier, InitializingBean {
 	private String algorithm = "SHA1withDSA";
@@ -54,7 +53,7 @@ public class DefaultVerigier implements Verifier, InitializingBean {
 	public boolean verify(byte[] signvalue) {
 		try {
 			Signature signature = SwapAreaUtil.getSignatureObject();
-			byte[] decode = Base64.decode(signvalue);
+			byte[] decode = Base64.decodeBase64(signvalue);
 			boolean result = signature.verify(decode);
 			return result;
 		} catch (Exception e) {

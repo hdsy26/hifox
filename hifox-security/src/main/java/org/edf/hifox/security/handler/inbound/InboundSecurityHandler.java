@@ -1,18 +1,21 @@
 package org.edf.hifox.security.handler.inbound;
 
+import java.util.Map;
+
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.StringUtils;
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Node;
 import org.edf.hifox.core.chain.invocation.Invocation;
-import org.edf.hifox.core.datatransfer.SecurityInfo;
+import org.edf.hifox.core.constant.SysParamConstant;
 import org.edf.hifox.core.exception.FailureException;
 import org.edf.hifox.core.handler.Handler;
 import org.edf.hifox.core.reqinfo.InboundRequestInfo;
 import org.edf.hifox.core.util.ByteArrayUtil;
-import org.edf.hifox.core.util.DataConvertUtil;
-import org.edf.hifox.core.util.SpringContextUtil;
 import org.edf.hifox.core.util.StringUtil;
 import org.edf.hifox.security.cipher.Decipher;
 import org.edf.hifox.security.constant.ErrorCodeConstant;
-import org.edf.hifox.security.constant.SecurityConstant;
 import org.edf.hifox.security.signer.Verifier;
 
 
@@ -22,43 +25,53 @@ import org.edf.hifox.security.signer.Verifier;
  *
  */
 public class InboundSecurityHandler implements Handler<InboundRequestInfo> {
+	
+	private Map<String, Object> securityPolicy;
 
 	@Override
 	public void handle(InboundRequestInfo data, Invocation invocation) {
-		String reqNodeId = data.getReqNodeId();
-		String requestEncoding = data.getAgreedRequestEncoding();
-		String contentString = data.getContentString();
 		
-		String securityInfo = data.getSecurityInfo();
-		byte[] decodedSecurityInfo = Base64.decodeBase64(StringUtil.toBytes(securityInfo, requestEncoding));
-		String decodedSecurityInfoString = ByteArrayUtil.toString(decodedSecurityInfo, requestEncoding);
+		String requestEncoding = data.getRequestEncoding();
+		String allContentString = data.getContentString();
 		
-		SecurityInfo info = DataConvertUtil.convert("node-security", decodedSecurityInfoString);
+		// 发起方节点
+		String reqNodeId = StringUtils.substringAfterLast(allContentString, SysParamConstant.LINE_SEPARATOR_FIXED);
 		
-		if (SecurityConstant.SECURITY_MESSAGE_MODE_SIGN.equals(info.getMode())) {
-			Verifier verifier = SpringContextUtil.getBean(reqNodeId + SecurityConstant.SECURITY_MESSAGE_VERIFIER_SUFFIX, Verifier.class);
-			if (verifier == null)
-				throw new FailureException(ErrorCodeConstant.E0001S050, new Object[]{reqNodeId});
-			
-			verifier.update(contentString);
-			
-			if (!verifier.verify(info.getSignature()))
-				throw new FailureException(ErrorCodeConstant.E0001S050, new Object[]{reqNodeId});
-			
-		} else if (SecurityConstant.SECURITY_MESSAGE_MODE_ENCRYPT.equals(info.getMode())){
-			Decipher decipher = SpringContextUtil.getBean(reqNodeId + SecurityConstant.SECURITY_MESSAGE_DECIPHER_SUFFIX, Decipher.class);
-			if (decipher == null)
-				throw new FailureException(ErrorCodeConstant.E0001S050, new Object[]{reqNodeId});
-			
-			try {
-				contentString = decipher.decrypt(contentString);
-			} catch (Exception e) {
-				throw new FailureException(ErrorCodeConstant.E0001S050, new Object[]{reqNodeId});
+		String temp = StringUtils.substringBeforeLast(allContentString, SysParamConstant.LINE_SEPARATOR_FIXED);
+		
+		String securityInfo = StringUtils.substringAfterLast(temp, SysParamConstant.LINE_SEPARATOR_FIXED);
+		
+		String contentString = StringUtils.substringBeforeLast(temp, SysParamConstant.LINE_SEPARATOR_FIXED);
+		
+		data.setContent(StringUtil.toBytes(contentString, requestEncoding));
+		data.setContentString(contentString);
+		
+		Object security;
+		if (securityPolicy != null && (security = securityPolicy.get(reqNodeId)) != null) {
+			if (security instanceof Verifier) {
+				Verifier verifier = (Verifier)security;
+				
+				byte[] decodedSecurityInfo = Base64.decodeBase64(StringUtil.toBytes(securityInfo, requestEncoding));
+				String decodedSecurityInfoString = ByteArrayUtil.toString(decodedSecurityInfo, requestEncoding);
+				
+				boolean valid = verifier.verify(contentString, decodedSecurityInfoString);
+				if (!valid)
+					throw new FailureException(ErrorCodeConstant.E0001S050, new Object[]{reqNodeId});
+				
+			} else if (security instanceof Decipher) {
+				Decipher decipher = (Decipher)security;
+				
+				try {
+					contentString = decipher.decrypt(contentString);
+				} catch (Exception e) {
+					throw new FailureException(ErrorCodeConstant.E0001S050, new Object[]{reqNodeId});
+				}
+				
+				data.setContent(StringUtil.toBytes(contentString, requestEncoding));
+				data.setContentString(contentString);
 			}
-			
-			data.setContent(StringUtil.toBytes(contentString, data.getAgreedRequestEncoding()));
-			data.setContentString(contentString);
 		}
+		
 		invocation.invoke(data);
 	}
 

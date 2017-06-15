@@ -33,9 +33,7 @@
 	</bean>
 	
 	<bean id="inboundProcessor" class="org.edf.hifox.core.processor.InboundProcessor" 
-		p:selector-ref="inboundStackSelector" p:requestEncoding="UTF-8" p:responseEncoding="UTF-8" 
-		p:reqNodeIdPath="/MESSAGE/HEAD/SYS_REQ_NODE_ID"
-		p:serviceIdXmlPath="/MESSAGE/HEAD/SYS_SERVICE_ID" />
+		p:selector-ref="inboundStackSelector" p:requestEncoding="UTF-8" p:responseEncoding="UTF-8" />
 
 
 

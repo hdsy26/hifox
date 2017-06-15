@@ -1,6 +1,7 @@
 package org.edf.hifox.core.util;
 
 import java.util.Date;
+import java.util.Locale;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.edf.hifox.core.constant.FormatConstant;
@@ -39,8 +40,8 @@ public final class MessageUtil {
 		head.setSysEventTraceId(isContext ? SwapAreaUtil.getInboundEventTraceId() : UniqueCodeUtil.randomUUID());
 		head.setSysReqVersion("1.0");
 		head.setSysReqDatetime(DateFormatUtils.format(new Date(), FormatConstant.YMDHMSS));
-		head.setSysLanguage(language);
-		head.setSysCountry(country);
+		head.setSysLanguage(language == null ? Locale.getDefault().getLanguage() : language);
+		head.setSysCountry(country == null ? Locale.getDefault().getCountry() : country);
 		head.setSysReqUsername(username);
 		return head;
 	}

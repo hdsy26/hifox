@@ -11,7 +11,8 @@
 	<!-- ==================================== inbound-handler ==================================== -->
 	<bean name="inboundExceptionHandler" class="org.edf.hifox.core.handler.inbound.InboundExceptionHandler" />
 	
-	<bean name="inboundDataConvertHandler" class="org.edf.hifox.core.handler.inbound.InboundDataConvertHandler" />
+	<bean name="inboundDataConvertHandler" class="org.edf.hifox.core.handler.inbound.InboundDataConvertHandler" 
+		p:serviceIdPath="/MESSAGE/HEAD/SYS_SERVICE_ID"/>
 	
 	<bean name="inboundSwapAreaHandler" class="org.edf.hifox.core.handler.inbound.InboundSwapAreaHandler">
 		<property name="eventTraceIdPath" value="['_inbound_request_message'].head.sysEventTraceId" />

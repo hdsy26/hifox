@@ -53,4 +53,9 @@ public class ErrorCodeConstant {
 	public static final String E0001S060 = "E0001S060";
 	
 	
+	/**
+	 * 数据转换失败!
+	 */
+	public static final String E0001S061 = "E0001S061";
+	
 }
