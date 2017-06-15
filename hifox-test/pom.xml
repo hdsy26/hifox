@@ -9,7 +9,7 @@
 	<artifactId>hifox-test</artifactId>
 	<packaging>pom</packaging>
 	<name>${project.artifactId}</name>
-	<description>The parent project of hifox-test-parent</description>
+	<description>The parent project of hifox-test</description>
 
 	<modules>
 		<module>hifox-test-core</module>
