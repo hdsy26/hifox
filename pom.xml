@@ -13,6 +13,7 @@
 		<module>hifox-core</module>
 		<module>hifox-security</module>
 		<module>hifox-test</module>
+		<module>hifox-demo</module>
 	</modules>
 
 	<properties>
