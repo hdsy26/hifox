@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:jms="http://www.springframework.org/schema/jms"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util-4.2.xsd
+		http://www.springframework.org/schema/jms
+        http://www.springframework.org/schema/jms/spring-jms-4.2.xsd">
+	
+	
+	<!-- ===================== SHA1withDSA ===================== -->
+	<bean id="202001_102000_signer" class="org.edf.hifox.security.signer.support.DefaultSigner">
+		<property name="resource">
+			<value>${202001_102000.resource.path}</value>
+		</property>
+		<property name="alias" value="202001_102000"/>
+		<property name="storeType" value="JKS" />
+		<property name="storePassword" value="${202001_102000.store.password}"/>
+		<property name="keyPassword" value="${202001_102000.key.password}"/>
+	</bean>
+	<!-- ======================================================= -->
+	
+	
+	<!-- ===================== MESSAGE DES ===================== -->
+	<bean id="202002_102000_encipher" class="org.edf.hifox.security.cipher.support.DesEncipher">
+		<property name="resource">
+			<value>${202002_102000.resource.path}</value>
+		</property>
+		<property name="alias" value="202002_102000"/>
+		<property name="storeType" value="JCEKS" />
+		<property name="storePassword" value="${202002_102000.store.password}"/>
+		<property name="keyPassword" value="${202002_102000.key.password}"/>
+	</bean>
+	<!-- =============================================== -->
+	
+	<util:map id="outSecurityPolicy">
+		<entry key="202001_102000" value-ref="202001_102000_signer"></entry>
+		<entry key="202002_102000" value-ref="202002_102000_encipher"></entry>
+	</util:map>
+	
+</beans>

@@ -1,0 +1,12 @@
+http://docs.oracle.com/javase/7/docs/technotes/tools/solaris/keytool.html
+
+SHA1withDSA
+keytool -genkey -dname "CN=wangyang,OU=server,O=server,L=SH,ST=SH,C=CN" -alias 202001_102000 -sigalg SHA1withDSA -keysize 1024 -keystore 202001_102000.keystore -storetype JKS -storepass storepass -keypass keypass -validity 3650
+keytool -list -rfc -keystore 202001_102000.keystore
+keytool -list -v -keystore 202001_102000.keystore
+keytool -export -alias 202001_102000 -keystore 202001_102000.keystore -file 202001_102000_publickey.cer
+
+DES
+keytool -genseckey -dname "CN=wangyang,OU=server,O=server,L=SH,ST=SH,C=CN" -alias 202002_102000 -keyalg DES -keysize 56 -keystore 202002_102000.keystore -storetype JCEKS -storepass storepass -keypass keypass -validity 3650
+keytool -list -rfc -storetype JCEKS -keystore 202002_102000.keystore
+keytool -list -v -storetype JCEKS -keystore 202002_102000.keystore

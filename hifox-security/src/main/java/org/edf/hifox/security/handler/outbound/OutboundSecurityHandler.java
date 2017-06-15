@@ -19,7 +19,7 @@ import org.edf.hifox.security.signer.Signer;
  *
  */
 public class OutboundSecurityHandler implements Handler<OutboundRequestInfo> {
-	private Map<String, Object> securityPolicy;
+	private Map<String, Object> outSecurityPolicy;
 
 	@Override
 	public void handle(OutboundRequestInfo data, Invocation invocation) {
@@ -39,7 +39,7 @@ public class OutboundSecurityHandler implements Handler<OutboundRequestInfo> {
 		String targetNodeId = head.getSysTargetNodeId();
 		
 		Object security;
-		if (securityPolicy != null && (security = securityPolicy.get(targetNodeId)) != null) {
+		if (outSecurityPolicy != null && (security = outSecurityPolicy.get(targetNodeId)) != null) {
 			String contentString = data.getContentString();
 			
 			if (security instanceof Signer) {
@@ -70,8 +70,8 @@ public class OutboundSecurityHandler implements Handler<OutboundRequestInfo> {
 		invocation.invoke(data);
 	}
 
-	public void setSecurityPolicy(Map<String, Object> securityPolicy) {
-		this.securityPolicy = securityPolicy;
+	public void setOutSecurityPolicy(Map<String, Object> outSecurityPolicy) {
+		this.outSecurityPolicy = outSecurityPolicy;
 	}
 
 }

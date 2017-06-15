@@ -4,9 +4,6 @@ import java.util.Map;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Node;
 import org.edf.hifox.core.chain.invocation.Invocation;
 import org.edf.hifox.core.constant.SysParamConstant;
 import org.edf.hifox.core.exception.FailureException;
@@ -25,8 +22,9 @@ import org.edf.hifox.security.signer.Verifier;
  *
  */
 public class InboundSecurityHandler implements Handler<InboundRequestInfo> {
+	private String localNodeId;
 	
-	private Map<String, Object> securityPolicy;
+	private Map<String, Object> inSecurityPolicy;
 
 	@Override
 	public void handle(InboundRequestInfo data, Invocation invocation) {
@@ -47,7 +45,7 @@ public class InboundSecurityHandler implements Handler<InboundRequestInfo> {
 		data.setContentString(contentString);
 		
 		Object security;
-		if (securityPolicy != null && (security = securityPolicy.get(reqNodeId)) != null) {
+		if (inSecurityPolicy != null && (security = inSecurityPolicy.get(reqNodeId + "_" + localNodeId)) != null) {
 			if (security instanceof Verifier) {
 				Verifier verifier = (Verifier)security;
 				
@@ -73,6 +71,14 @@ public class InboundSecurityHandler implements Handler<InboundRequestInfo> {
 		}
 		
 		invocation.invoke(data);
+	}
+
+	public void setLocalNodeId(String localNodeId) {
+		this.localNodeId = localNodeId;
+	}
+
+	public void setInSecurityPolicy(Map<String, Object> inSecurityPolicy) {
+		this.inSecurityPolicy = inSecurityPolicy;
 	}
 
 }
