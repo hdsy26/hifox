@@ -1,0 +1,14 @@
+
+		<MESSAGE>
+			<HEAD>
+				<SYS_RESP_NODE_ID>${head.sysRespNodeId}</SYS_RESP_NODE_ID>
+				<SYS_TARGET_NODE_ID>${head.sysTargetNodeId}</SYS_TARGET_NODE_ID>
+				<SYS_EVENT_TRACE_ID>${head.sysEventTraceId}</SYS_EVENT_TRACE_ID>
+				<SYS_RECV_DATETIME>${head.sysRecvDatetime}</SYS_RECV_DATETIME>
+				<SYS_RESP_DATETIME>${head.sysRespDatetime}</SYS_RESP_DATETIME>
+				<SYS_RESP_STATUS>${head.sysRespStatus}</SYS_RESP_STATUS>
+				<SYS_RESP_CODE>${head.sysRespCode!}</SYS_RESP_CODE>
+				<SYS_RESP_DESC>${head.sysRespDesc!}</SYS_RESP_DESC>
+			</HEAD>
+			#{template}
+		</MESSAGE>

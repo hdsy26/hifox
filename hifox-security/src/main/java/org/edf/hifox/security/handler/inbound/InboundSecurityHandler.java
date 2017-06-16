@@ -10,6 +10,7 @@ import org.edf.hifox.core.exception.FailureException;
 import org.edf.hifox.core.handler.Handler;
 import org.edf.hifox.core.reqinfo.InboundRequestInfo;
 import org.edf.hifox.core.util.ByteArrayUtil;
+import org.edf.hifox.core.util.MessageUtil;
 import org.edf.hifox.core.util.StringUtil;
 import org.edf.hifox.security.cipher.Decipher;
 import org.edf.hifox.security.constant.ErrorCodeConstant;
@@ -22,8 +23,6 @@ import org.edf.hifox.security.signer.Verifier;
  *
  */
 public class InboundSecurityHandler implements Handler<InboundRequestInfo> {
-	private String localNodeId;
-	
 	private Map<String, Object> inSecurityPolicy;
 
 	@Override
@@ -45,7 +44,7 @@ public class InboundSecurityHandler implements Handler<InboundRequestInfo> {
 		data.setContentString(contentString);
 		
 		Object security;
-		if (inSecurityPolicy != null && (security = inSecurityPolicy.get(reqNodeId + "_" + localNodeId)) != null) {
+		if (inSecurityPolicy != null && (security = inSecurityPolicy.get(reqNodeId + "_" + MessageUtil.getNodeId())) != null) {
 			if (security instanceof Verifier) {
 				Verifier verifier = (Verifier)security;
 				
@@ -71,10 +70,6 @@ public class InboundSecurityHandler implements Handler<InboundRequestInfo> {
 		}
 		
 		invocation.invoke(data);
-	}
-
-	public void setLocalNodeId(String localNodeId) {
-		this.localNodeId = localNodeId;
 	}
 
 	public void setInSecurityPolicy(Map<String, Object> inSecurityPolicy) {

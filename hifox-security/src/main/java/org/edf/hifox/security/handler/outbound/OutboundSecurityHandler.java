@@ -10,6 +10,7 @@ import org.edf.hifox.core.datatransfer.Message;
 import org.edf.hifox.core.datatransfer.support.RequestHead;
 import org.edf.hifox.core.handler.Handler;
 import org.edf.hifox.core.reqinfo.OutboundRequestInfo;
+import org.edf.hifox.core.util.MessageUtil;
 import org.edf.hifox.security.cipher.Encipher;
 import org.edf.hifox.security.signer.Signer;
 
@@ -39,7 +40,7 @@ public class OutboundSecurityHandler implements Handler<OutboundRequestInfo> {
 		String targetNodeId = head.getSysTargetNodeId();
 		
 		Object security;
-		if (outSecurityPolicy != null && (security = outSecurityPolicy.get(targetNodeId)) != null) {
+		if (outSecurityPolicy != null && (security = outSecurityPolicy.get(MessageUtil.getNodeId() + "_" + targetNodeId)) != null) {
 			String contentString = data.getContentString();
 			
 			if (security instanceof Signer) {

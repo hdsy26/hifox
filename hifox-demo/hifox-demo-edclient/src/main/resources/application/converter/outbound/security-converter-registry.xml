@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings
+	xmlns="http://www.w3school.com.cn"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3school.com.cn ../../xsd/converter-registry.xsd">
+	
+	<mapping id="A000S000-request" converter-id="fmBeanToStrConverter" rulecreator-id="fmRuleCreator">
+		<template-def embed="application/converter/common-request.temp" encoding="UTF-8">
+			<value>
+			<![CDATA[
+			<BODY>
+				<type>${body.type}</type>
+				<text>${body.text}</text>
+			</BODY>
+			]]>
+			</value>
+		</template-def>
+	</mapping>
+	<mapping id="A000S000-response" converter-id="xsXmlToBeanConverter" rulecreator-id="xsRuleCreator">
+		<class-defs>
+			<class-def name="org.edf.hifox.core.datatransfer.support.ResponseMessage">
+				<field-def name="body" field-type="org.edf.hifox.core.datatransfer.Body" field-impl="com.demo.datatransfer.inbound.A000S000Resp"/>
+			</class-def>
+		</class-defs>
+	</mapping>
+	
+	<mapping id="A000S100-request" converter-id="fmBeanToStrConverter" rulecreator-id="fmRuleCreator">
+		<template-def embed="application/converter/common-request.temp" encoding="UTF-8">
+			<value>
+			<![CDATA[
+			<BODY>
+				<text>${body.text}</text>
+			</BODY>
+			]]>
+			</value>
+		</template-def>
+	</mapping>
+	<mapping id="A000S100-response" converter-id="xsXmlToBeanConverter" rulecreator-id="xsRuleCreator">
+		<class-defs>
+			<class-def name="org.edf.hifox.core.datatransfer.support.ResponseMessage">
+				<field-def name="body" field-type="org.edf.hifox.core.datatransfer.Body" field-impl="com.demo.datatransfer.inbound.A000S100Resp"/>
+			</class-def>
+		</class-defs>
+	</mapping>
+
+</mappings>

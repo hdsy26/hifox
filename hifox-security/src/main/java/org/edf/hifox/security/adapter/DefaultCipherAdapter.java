@@ -4,7 +4,6 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.edf.hifox.core.chain.Chain;
 import org.edf.hifox.core.chain.selector.ChainSelector;
-import org.edf.hifox.core.datatransfer.Body;
 import org.edf.hifox.core.exception.FailureException;
 import org.edf.hifox.core.util.SwapAreaUtil;
 import org.edf.hifox.security.constant.ErrorCodeConstant;
@@ -15,12 +14,10 @@ public class DefaultCipherAdapter implements CipherAdapter {
 	private ChainSelector deChainSelector;
 
 	@Override
-	public String encrypt(String input) {
+	public String encrypt(String type, String input) {
 		try {
 			// 适配加密
-			Body body = SwapAreaUtil.getInboundRequestMessage().getBody();
-			
-			Chain enChain = enChainSelector.select(body);
+			Chain enChain = enChainSelector.select(type);
 	
 			SwapAreaUtil.setObjectUniqueMark(enChain.objectUniqueMark());
 	

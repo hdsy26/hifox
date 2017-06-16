@@ -277,15 +277,15 @@
 		p:expressionParser-ref="expressionParser">
 		<constructor-arg>
 			<map>
-				<entry key="type == 'RSA'" value-ref="rsa-encipher-chain" />
-				<entry key="type == 'DES'" value-ref="des-encipher-chain" />
-				<entry key="type == 'AES'" value-ref="aes-encipher-chain" />
-				<entry key="type == 'RSA-DES'" value-ref="rsa-des-encipher-chain" />
-				<entry key="type == 'DES-AES'" value-ref="des-aes-encipher-chain" />
-				<entry key="type == 'DES-RANDOMKEY'" value-ref="des-randomkey-encipher-chain" />
-				<entry key="type == 'AES-RANDOMKEY'" value-ref="aes-randomkey-encipher-chain" />
-				<entry key="type == 'MD5'" value-ref="md5-encipher-chain" />
-				<entry key="type == 'SHA256'" value-ref="sha256-encipher-chain" />
+				<entry key="#this == 'RSA'" value-ref="rsa-encipher-chain" />
+				<entry key="#this == 'DES'" value-ref="des-encipher-chain" />
+				<entry key="#this == 'AES'" value-ref="aes-encipher-chain" />
+				<entry key="#this == 'RSA-DES'" value-ref="rsa-des-encipher-chain" />
+				<entry key="#this == 'DES-AES'" value-ref="des-aes-encipher-chain" />
+				<entry key="#this == 'DES-RANDOMKEY'" value-ref="des-randomkey-encipher-chain" />
+				<entry key="#this == 'AES-RANDOMKEY'" value-ref="aes-randomkey-encipher-chain" />
+				<entry key="#this == 'MD5'" value-ref="md5-encipher-chain" />
+				<entry key="#this == 'SHA256'" value-ref="sha256-encipher-chain" />
 			</map>
 		</constructor-arg>
 	</bean>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services
+	xmlns="http://www.w3school.com.cn"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3school.com.cn ../../xsd/service-registry.xsd">
+	
+	<service id="A000S000" bean-id="encryptDecryptServiceImp" method-name="encrypt">
+		<method-arguments>
+			<argument order="0" type="com.demo.datatransfer.inbound.A000S000Req" 
+				expression="['_inbound_request_message'].body" />
+		</method-arguments>
+	</service>
+	
+	<service id="A000S100" bean-id="encryptDecryptServiceImp" method-name="decrypt">
+		<method-arguments>
+			<argument order="0" type="com.demo.datatransfer.inbound.A000S100Req" 
+				expression="['_inbound_request_message'].body" />
+		</method-arguments>
+	</service>
+	
+</services>

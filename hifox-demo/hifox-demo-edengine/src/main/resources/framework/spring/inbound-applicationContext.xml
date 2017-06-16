@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+	
+	<!-- ==================================== inbound-handler ==================================== -->
+	<bean name="inboundSecurityHandler" class="org.edf.hifox.security.handler.inbound.InboundSecurityHandler">
+		<property name="inSecurityPolicy" ref="inSecurityPolicy"/>
+	</bean>
+	
+	<bean name="inboundExceptionHandler" class="org.edf.hifox.core.handler.inbound.InboundExceptionHandler" />
+	
+	<bean name="inboundDataConvertHandler" class="org.edf.hifox.core.handler.inbound.InboundDataConvertHandler" 
+		p:serviceIdPath="/MESSAGE/HEAD/SYS_SERVICE_ID"/>
+	
+	<bean name="inboundSwapAreaHandler" class="org.edf.hifox.core.handler.inbound.InboundSwapAreaHandler">
+		<property name="eventTraceIdPath" value="['_inbound_request_message'].head.sysEventTraceId" />
+		<property name="reqUsernamePath" value="['_inbound_request_message'].head.sysReqUsername" />
+	</bean>
+	
+	<bean id="log4jContext" class="org.edf.hifox.core.log.context.Log4jContext" />
+	
+	<bean name="logConfigHandler" class="org.edf.hifox.core.handler.log.LogHandler">
+		<property name="contexts">
+			<map>
+				<entry key="['_log_service_id']" value="['_inbound_request_message'].head.sysServiceId" />
+			</map>
+		</property>
+		<property name="logContext" ref="log4jContext" />
+	</bean>
+	
+	<bean id="defaultServiceInvoker" class="org.edf.hifox.core.invoker.DefaultServiceInvoker" 
+		p:registry-ref="serviceRegistry" />
+	
+	<bean name="serviceHandler" class="org.edf.hifox.core.handler.service.ServiceHandler">
+		<property name="invoker" ref="defaultServiceInvoker" />
+	</bean>
+	<!-- ========================================================================================= -->
+	
+	<bean id="httpServiceInboundChain" class="org.edf.hifox.core.chain.HandlerChain">
+		<property name="handlerList">
+			<list>
+				<ref bean="inboundSecurityHandler"/>
+				<ref bean="inboundExceptionHandler"/>
+				<ref bean="inboundDataConvertHandler"/>
+				<ref bean="inboundSwapAreaHandler"/>
+				<ref bean="logConfigHandler"/>
+				<ref bean="serviceHandler"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 呼入链选择器 -->
+	<bean id="inboundStackSelector"
+		class="org.edf.hifox.core.chain.selector.DefaultChainSelector"
+		p:expressionParser-ref="expressionParser"
+		p:defaultChain-ref="httpServiceInboundChain">
+		<constructor-arg>
+			<map>
+				<entry key="adapterId == 'httpService'" value-ref="httpServiceInboundChain" />
+			</map>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="inboundProcessor" class="org.edf.hifox.core.processor.InboundProcessor" 
+		p:selector-ref="inboundStackSelector" p:requestEncoding="UTF-8" p:responseEncoding="UTF-8" />
+	
+</beans>
+

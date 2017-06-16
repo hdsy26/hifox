@@ -3,10 +3,10 @@
   <display-name>hifox-test-core</display-name>
   <context-param>
     <param-name>classEditors</param-name>
-    <param-value>org.edf.hifox.editor.Log4jClassEditor</param-value>
+    <param-value>org.edf.hifox.core.editor.Log4jClassEditor</param-value>
   </context-param>
   <listener>
-    <listener-class>org.edf.hifox.editor.ClassEditorListener</listener-class>
+    <listener-class>org.edf.hifox.core.editor.ClassEditorListener</listener-class>
   </listener>
   <context-param>
     <param-name>contextConfigLocation</param-name>
@@ -21,7 +21,7 @@
   <servlet>
     <display-name>Service</display-name>
     <servlet-name>Service</servlet-name>
-    <servlet-class>org.edf.hifox.adapter.http.HttpServletAdapter</servlet-class>
+    <servlet-class>org.edf.hifox.core.adapter.http.HttpServletAdapter</servlet-class>
     <init-param>
       <param-name>logContextBeanId</param-name>
       <param-value>log4jContext</param-value>

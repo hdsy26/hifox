@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+	
+	<!-- ===================================== outbound-handler ==================================== -->
+	<bean name="outboundSwapAreaHandler" class="org.edf.hifox.core.handler.outbound.OutboundSwapAreaHandler">
+		<property name="reqUsernamePath" value="['_outbound_request_message'].head.sysReqUsername" />
+		<property name="serviceDirectory" ref="defaultServiceDirectory" />
+	</bean>
+	
+	<bean name="outboundDataConvertHandler" class="org.edf.hifox.core.handler.outbound.OutboundDataConvertHandler" />
+	
+	<bean name="outboundSecurityHandler" class="org.edf.hifox.security.handler.outbound.OutboundSecurityHandler">
+		<property name="outSecurityPolicy" ref="outSecurityPolicy"/>
+	</bean>
+	
+	<bean id="defaultChannelInvoker" class="org.edf.hifox.core.invoker.DefaultChannelInvoker"
+		p:registry-ref="channelRegistry" />
+		
+	<bean name="channelHandler" class="org.edf.hifox.core.handler.channel.ChannelHandler">
+		<property name="invoker" ref="defaultChannelInvoker" />
+	</bean>
+	<!-- =========================================================================================== -->
+	
+	<bean id="httpServiceOutboundChain" class="org.edf.hifox.core.chain.HandlerChain">
+		<property name="handlerList">
+			<list>
+				<ref bean="outboundSwapAreaHandler"/>
+				<ref bean="outboundDataConvertHandler"/>
+				<ref bean="outboundSecurityHandler"/>
+				<ref bean="channelHandler"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 呼出链选择器 -->
+	<bean id="outboundStackSelector"
+		class="org.edf.hifox.core.chain.selector.DefaultChainSelector"
+		p:expressionParser-ref="expressionParser"
+		p:defaultChain-ref="httpServiceOutboundChain">
+		<constructor-arg>
+			<map>
+				<entry key="requestMessage instanceof T(org.edf.hifox.core.datatransfer.Message) 
+					or requestMessage instanceof T(java.util.Map) 
+					or requestMessage instanceof T(java.lang.String)" value-ref="httpServiceOutboundChain" />
+			</map>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="outboundProcessor" class="org.edf.hifox.core.processor.OutboundProcessor" 
+		p:selector-ref="outboundStackSelector" />
+	
+</beans>
+

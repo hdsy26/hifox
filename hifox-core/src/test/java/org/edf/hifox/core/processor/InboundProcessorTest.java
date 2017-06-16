@@ -28,7 +28,7 @@ public class InboundProcessorTest {
 	@Resource(name = "inboundProcessor")
 	private Processor<byte[], InboundRequestInfo> inboundProcessor;
 
-	@Value("${nodeId}")
+	@Value("${local.node.id}")
 	private String nodeId;
 
 	@SuppressWarnings("unchecked")

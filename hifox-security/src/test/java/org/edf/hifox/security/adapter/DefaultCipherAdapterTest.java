@@ -1,17 +1,8 @@
 package org.edf.hifox.security.adapter;
 
-import java.util.Date;
-
 import javax.annotation.Resource;
 
-import org.apache.commons.lang3.time.DateFormatUtils;
-import org.edf.hifox.core.datatransfer.Body;
-import org.edf.hifox.core.datatransfer.Message;
-import org.edf.hifox.core.datatransfer.support.RequestHead;
-import org.edf.hifox.core.datatransfer.support.RequestMessage;
 import org.edf.hifox.core.editor.ClassEditor;
-import org.edf.hifox.core.util.SwapAreaUtil;
-import org.edf.hifox.security.datatransfer.inbound.A000S000Req;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,16 +29,8 @@ public class DefaultCipherAdapterTest {
 
 	@Test
 	public void testEncryptDecrypt_RSA() {
-		A000S000Req req = new A000S000Req();
-		req.setDatetime(DateFormatUtils.format(new Date(), "yyyyMMdd"));
-		req.setText("abcd你好");
-		req.setType("RSA");
-		Message<RequestHead, Body> reqMsg = new RequestMessage();
-		reqMsg.setBody(req);
 		
-		SwapAreaUtil.setInboundRequestMessage(reqMsg);
-		
-		String str = cipherAdapter.encrypt(req.getText());
+		String str = cipherAdapter.encrypt("RSA", "abcd你好");
 		
 		System.out.println("encrypt:" + str);
 		
@@ -58,16 +41,8 @@ public class DefaultCipherAdapterTest {
 	
 	@Test
 	public void testEncryptDecrypt_DES() {
-		A000S000Req req = new A000S000Req();
-		req.setDatetime(DateFormatUtils.format(new Date(), "yyyyMMdd"));
-		req.setText("abcd你好");
-		req.setType("DES");
-		Message<RequestHead, Body> reqMsg = new RequestMessage();
-		reqMsg.setBody(req);
 		
-		SwapAreaUtil.setInboundRequestMessage(reqMsg);
-		
-		String str = cipherAdapter.encrypt(req.getText());
+		String str = cipherAdapter.encrypt("DES", "abcd你好");
 		
 		System.out.println("encrypt:" + str);
 		
@@ -78,16 +53,8 @@ public class DefaultCipherAdapterTest {
 	
 	@Test
 	public void testEncryptDecrypt_AES() {
-		A000S000Req req = new A000S000Req();
-		req.setDatetime(DateFormatUtils.format(new Date(), "yyyyMMdd"));
-		req.setText("abcd你好");
-		req.setType("AES");
-		Message<RequestHead, Body> reqMsg = new RequestMessage();
-		reqMsg.setBody(req);
 		
-		SwapAreaUtil.setInboundRequestMessage(reqMsg);
-		
-		String str = cipherAdapter.encrypt(req.getText());
+		String str = cipherAdapter.encrypt("AES", "abcd你好");
 		
 		System.out.println("encrypt:" + str);
 		
@@ -98,16 +65,8 @@ public class DefaultCipherAdapterTest {
 	
 	@Test
 	public void testEncryptDecrypt_RSA_DES() {
-		A000S000Req req = new A000S000Req();
-		req.setDatetime(DateFormatUtils.format(new Date(), "yyyyMMdd"));
-		req.setText("abcd你好");
-		req.setType("RSA-DES");
-		Message<RequestHead, Body> reqMsg = new RequestMessage();
-		reqMsg.setBody(req);
 		
-		SwapAreaUtil.setInboundRequestMessage(reqMsg);
-		
-		String str = cipherAdapter.encrypt(req.getText());
+		String str = cipherAdapter.encrypt("RSA-DES", "abcd你好");
 		
 		System.out.println("encrypt:" + str);
 		
@@ -118,16 +77,8 @@ public class DefaultCipherAdapterTest {
 	
 	@Test
 	public void testEncryptDecrypt_DES_AES() {
-		A000S000Req req = new A000S000Req();
-		req.setDatetime(DateFormatUtils.format(new Date(), "yyyyMMdd"));
-		req.setText("abcd你好");
-		req.setType("DES-AES");
-		Message<RequestHead, Body> reqMsg = new RequestMessage();
-		reqMsg.setBody(req);
 		
-		SwapAreaUtil.setInboundRequestMessage(reqMsg);
-		
-		String str = cipherAdapter.encrypt(req.getText());
+		String str = cipherAdapter.encrypt("DES-AES", "abcd你好");
 		
 		System.out.println("encrypt:" + str);
 		
@@ -138,16 +89,8 @@ public class DefaultCipherAdapterTest {
 	
 	@Test
 	public void testEncryptDecrypt_DES_RANDOMKEY() {
-		A000S000Req req = new A000S000Req();
-		req.setDatetime(DateFormatUtils.format(new Date(), "yyyyMMdd"));
-		req.setText("abcd你好");
-		req.setType("DES-RANDOMKEY");
-		Message<RequestHead, Body> reqMsg = new RequestMessage();
-		reqMsg.setBody(req);
 		
-		SwapAreaUtil.setInboundRequestMessage(reqMsg);
-		
-		String str = cipherAdapter.encrypt(req.getText());
+		String str = cipherAdapter.encrypt("DES-RANDOMKEY", "abcd你好");
 		
 		System.out.println("encrypt:" + str);
 		
@@ -158,16 +101,8 @@ public class DefaultCipherAdapterTest {
 	
 	@Test
 	public void testEncryptDecrypt_AES_RANDOMKEY() {
-		A000S000Req req = new A000S000Req();
-		req.setDatetime(DateFormatUtils.format(new Date(), "yyyyMMdd"));
-		req.setText("abcd你好");
-		req.setType("AES-RANDOMKEY");
-		Message<RequestHead, Body> reqMsg = new RequestMessage();
-		reqMsg.setBody(req);
 		
-		SwapAreaUtil.setInboundRequestMessage(reqMsg);
-		
-		String str = cipherAdapter.encrypt(req.getText());
+		String str = cipherAdapter.encrypt("AES-RANDOMKEY", "abcd你好");
 		
 		System.out.println("encrypt:" + str);
 		
@@ -178,32 +113,16 @@ public class DefaultCipherAdapterTest {
 	
 	@Test
 	public void testEncrypt_MD5() {
-		A000S000Req req = new A000S000Req();
-		req.setDatetime(DateFormatUtils.format(new Date(), "yyyyMMdd"));
-		req.setText("abcd你好");
-		req.setType("MD5");
-		Message<RequestHead, Body> reqMsg = new RequestMessage();
-		reqMsg.setBody(req);
 		
-		SwapAreaUtil.setInboundRequestMessage(reqMsg);
-		
-		String str = cipherAdapter.encrypt(req.getText());
+		String str = cipherAdapter.encrypt("MD5", "abcd你好");
 		
 		System.out.println("encrypt:" + str);
 	}
 	
 	@Test
 	public void testEncrypt_SHA256() {
-		A000S000Req req = new A000S000Req();
-		req.setDatetime(DateFormatUtils.format(new Date(), "yyyyMMdd"));
-		req.setText("abcd你好");
-		req.setType("SHA256");
-		Message<RequestHead, Body> reqMsg = new RequestMessage();
-		reqMsg.setBody(req);
 		
-		SwapAreaUtil.setInboundRequestMessage(reqMsg);
-		
-		String str = cipherAdapter.encrypt(req.getText());
+		String str = cipherAdapter.encrypt("SHA256", "abcd你好");
 		
 		System.out.println("encrypt:" + str);
 	}

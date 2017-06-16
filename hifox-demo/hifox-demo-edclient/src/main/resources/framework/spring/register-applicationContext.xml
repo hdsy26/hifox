@@ -42,7 +42,7 @@
 		<property name="registry" ref="channelRegistry" />
 		<property name="resources">
 			<list>
-				<value>classpath*:application/*/channel/*-channel-registry.xml</value>
+				<value>classpath*:application/channel/*-channel-registry.xml</value>
 			</list>
 		</property>
 	</bean>

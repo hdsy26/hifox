@@ -18,7 +18,7 @@
 		<property name="locations">
 			<list>
 				<value>classpath*:*.properties</value>
-				<value>classpath*:application/*/*.properties</value>
+				<value>classpath*:application/*.properties</value>
 			</list>
 		</property>
 	</bean>
@@ -70,6 +70,12 @@
 	<bean class="org.springframework.beans.factory.config.MethodInvokingBean">
     	<property name="staticMethod" value="org.edf.hifox.core.util.DataConvertUtil.setConverterManager" />
     	<property name="arguments" ref="defaultConverterManager"/>
+    </bean>
+    
+    <!-- 请求报文工具 -->
+    <bean class="org.springframework.beans.factory.config.MethodInvokingBean">
+    	<property name="staticMethod" value="org.edf.hifox.core.util.MessageUtil.setNodeId" />
+    	<property name="arguments" value="${local.node.id}"/>
     </bean>
 	
 	

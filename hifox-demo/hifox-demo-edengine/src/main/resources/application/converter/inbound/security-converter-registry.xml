@@ -6,9 +6,9 @@
 
 	<mapping id="A000S000-request" converter-id="xsXmlToBeanConverter" rulecreator-id="xsRuleCreator">
 		<class-defs>
-			<class-def name="org.edf.hifox.datatransfer.support.RequestMessage">
-				<field-def name="body" field-type="org.edf.hifox.datatransfer.Body"
-					field-impl="org.edf.hifox.security.datatransfer.inbound.A000S000Req" />
+			<class-def name="org.edf.hifox.core.datatransfer.support.RequestMessage">
+				<field-def name="body" field-type="org.edf.hifox.core.datatransfer.Body"
+					field-impl="com.demo.datatransfer.inbound.A000S000Req" />
 			</class-def>
 		</class-defs>
 	</mapping>
@@ -17,7 +17,27 @@
 			<value>
 			<![CDATA[
 			<BODY>
-				<test>${body.test}</test>
+				<text>${body.text}</text>
+			</BODY>
+			]]>
+			</value>
+		</template-def>
+	</mapping>
+	
+	<mapping id="A000S100-request" converter-id="xsXmlToBeanConverter" rulecreator-id="xsRuleCreator">
+		<class-defs>
+			<class-def name="org.edf.hifox.core.datatransfer.support.RequestMessage">
+				<field-def name="body" field-type="org.edf.hifox.core.datatransfer.Body"
+					field-impl="com.demo.datatransfer.inbound.A000S100Req" />
+			</class-def>
+		</class-defs>
+	</mapping>
+	<mapping id="A000S100-response" converter-id="fmBeanToStrConverter" rulecreator-id="fmRuleCreator">
+		<template-def embed="application/converter/common-response.temp" encoding="UTF-8">
+			<value>
+			<![CDATA[
+			<BODY>
+				<text>${body.text}</text>
 			</BODY>
 			]]>
 			</value>

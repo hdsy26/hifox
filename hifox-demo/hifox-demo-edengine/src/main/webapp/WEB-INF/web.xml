@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>hifox-demo-edengine</display-name>
+  <context-param>
+    <param-name>classEditors</param-name>
+    <param-value>org.edf.hifox.core.editor.Log4jClassEditor</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.edf.hifox.core.editor.ClassEditorListener</listener-class>
+  </listener>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>
+			classpath*:framework/spring/*-applicationContext.xml
+			classpath*:application/spring/*-applicationContext.xml
+		</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <servlet>
+    <display-name>Service</display-name>
+    <servlet-name>Service</servlet-name>
+    <servlet-class>org.edf.hifox.core.adapter.http.HttpServletAdapter</servlet-class>
+    <init-param>
+      <param-name>logContextBeanId</param-name>
+      <param-value>log4jContext</param-value>
+    </init-param>
+    <init-param>
+      <param-name>processorBeanId</param-name>
+      <param-value>inboundProcessor</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Service</servlet-name>
+    <url-pattern>/service/*</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>

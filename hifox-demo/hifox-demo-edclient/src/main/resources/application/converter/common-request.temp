@@ -1,0 +1,22 @@
+
+		<MESSAGE>
+			<HEAD>
+				<SYS_REQ_NODE_ID>${head.sysReqNodeId}</SYS_REQ_NODE_ID>
+				<SYS_TARGET_NODE_ID>${head.sysTargetNodeId}</SYS_TARGET_NODE_ID>
+				<SYS_SERVICE_ID>${head.sysServiceId}</SYS_SERVICE_ID>
+				<SYS_SERVICE_TYPE>${head.sysServiceType}</SYS_SERVICE_TYPE>
+				<SYS_EVENT_TRACE_ID>${head.sysEventTraceId}</SYS_EVENT_TRACE_ID>
+				<SYS_REQ_VERSION>${head.sysReqVersion}</SYS_REQ_VERSION>
+				<SYS_REQ_DATETIME>${head.sysReqDatetime}</SYS_REQ_DATETIME>
+				<#if head.sysLanguage??>
+				<SYS_LANGUAGE>${head.sysLanguage}</SYS_LANGUAGE>
+				</#if>
+				<#if head.sysCountry??>
+				<SYS_COUNTRY>${head.sysCountry}</SYS_COUNTRY>
+				</#if>
+				<#if head.sysReqUsername??>
+				<SYS_REQ_USERNAME>${head.sysReqUsername}</SYS_REQ_USERNAME>
+				</#if>
+			</HEAD>
+			#{template}
+		</MESSAGE>
