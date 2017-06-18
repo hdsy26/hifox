@@ -6,7 +6,7 @@ import org.edf.hifox.security.cipher.AbstractEncipher;
 
 /**
  * 非对称
- * @author wangyang01
+ * @author WANGYANG
  *
  */
 public class RsaEncipher extends AbstractEncipher {

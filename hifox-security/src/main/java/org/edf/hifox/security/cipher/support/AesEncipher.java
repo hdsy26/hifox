@@ -5,7 +5,7 @@ import java.security.SecureRandom;
 import org.edf.hifox.security.cipher.AbstractEncipher;
 
 public class AesEncipher extends AbstractEncipher {
-	private String algorithm = "AES";
+	private static final String ALGORITHM = "AES";
 	private String mode = "ECB";
 	private String padding = "PKCS5Padding";
 	private SecureRandom secureRandom = new SecureRandom(new byte[]{});
@@ -17,7 +17,7 @@ public class AesEncipher extends AbstractEncipher {
 
 	@Override
 	protected String obtainAlgorithm() {
-		return algorithm;
+		return ALGORITHM;
 	}
 
 	@Override
@@ -33,11 +33,6 @@ public class AesEncipher extends AbstractEncipher {
 	@Override
 	protected SecureRandom obtainSecureRandom() {
 		return secureRandom;
-	}
-
-	
-	public void setAlgorithm(String algorithm) {
-		this.algorithm = algorithm;
 	}
 
 	public void setMode(String mode) {

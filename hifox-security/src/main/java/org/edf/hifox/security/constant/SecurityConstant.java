@@ -6,6 +6,7 @@ package org.edf.hifox.security.constant;
  *
  */
 public class SecurityConstant {
+	// 之前为加密数据
 	public static final String METAINFO_PREFIX = " ";
 	public static final String RANDOMKEY_PREFIX = METAINFO_PREFIX + " ";
 	public static final String OBJECT_PREFIX = "	";

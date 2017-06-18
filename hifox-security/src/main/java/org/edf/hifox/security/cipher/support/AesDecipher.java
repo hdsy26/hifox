@@ -6,14 +6,14 @@ import org.edf.hifox.security.cipher.AbstractDecipher;
 
 public class AesDecipher extends AbstractDecipher {
 	
-	private String algorithm = "AES";
+	private static final String ALGORITHM = "AES";
 	private String mode = "ECB";
 	private String padding = "PKCS5Padding";
 	private SecureRandom secureRandom = new SecureRandom(new byte[]{});
 	
 	@Override
 	protected String obtainAlgorithm() {
-		return algorithm;
+		return ALGORITHM;
 	}
 	@Override
 	protected String obtainMode() {
@@ -29,9 +29,6 @@ public class AesDecipher extends AbstractDecipher {
 	}
 	
 	
-	public void setAlgorithm(String algorithm) {
-		this.algorithm = algorithm;
-	}
 	public void setMode(String mode) {
 		this.mode = mode;
 	}

@@ -309,6 +309,16 @@
 	<bean id="defaultCipherAdapter" class="org.edf.hifox.security.adapter.DefaultCipherAdapter">
 		<property name="enChainSelector" ref="encipherChainSelector"/>
 		<property name="deChainSelector" ref="decipherChainSelector"/>
+		<property name="noappendEnChainInfo">
+			<util:list>
+				<value>MD5</value>
+				<value>SHA1</value>
+				<value>SHA224</value>
+				<value>SHA256</value>
+				<value>SHA384</value>
+				<value>SHA512</value>
+			</util:list>
+		</property>
 	</bean>
 	
 	

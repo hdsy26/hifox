@@ -15,18 +15,23 @@ public class EncipherHandler implements Handler<String> {
 	
 	private Encipher encipher;
 	
+	private boolean appendMetainfo = false;
+	
 	@Override
 	public void handle(String data, Invocation invocation) {
 		try {
 			String result = encipher.encrypt(data);
 			
-			// 追加加密元数据信息
 			CipherMetainfo em = encipher.metainfo();
-			byte[] info = em.getInfo();
-			byte[] encodedInfo = Base64.encodeBase64(info);
-			String encodedStringInfo = new String(encodedInfo, em.getCharsetName());
 			
-			result = StringUtils.join(result, SecurityConstant.METAINFO_PREFIX, encodedStringInfo);
+			if (appendMetainfo) {
+				// 追加加密元数据信息
+				byte[] info = em.getInfo();
+				byte[] encodedInfo = Base64.encodeBase64(info);
+				String encodedStringInfo = new String(encodedInfo, em.getCharsetName());
+				
+				result = StringUtils.join(result, SecurityConstant.METAINFO_PREFIX, encodedStringInfo);
+			}
 			
 			byte[] encryptedRandomkey = SwapAreaUtil.getEncryptedRandomkey();
 			if (encryptedRandomkey != null) {
@@ -50,6 +55,10 @@ public class EncipherHandler implements Handler<String> {
 
 	public void setEncipher(Encipher encipher) {
 		this.encipher = encipher;
+	}
+
+	public void setAppendMetainfo(boolean appendMetainfo) {
+		this.appendMetainfo = appendMetainfo;
 	}
 	
 }
