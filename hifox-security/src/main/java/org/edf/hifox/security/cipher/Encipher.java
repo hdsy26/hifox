@@ -5,7 +5,7 @@ import org.edf.hifox.security.meta.CipherMetainfo;
 
 /**
  * 加密接口
- * @author wangyang01
+ * @author WANGYANG
  *
  */
 public interface Encipher {

@@ -4,7 +4,7 @@ import org.edf.hifox.security.meta.CipherMetainfo;
 
 /**
  * 解密接口
- * @author wangyang01
+ * @author WANGYANG
  *
  */
 public interface Decipher {
