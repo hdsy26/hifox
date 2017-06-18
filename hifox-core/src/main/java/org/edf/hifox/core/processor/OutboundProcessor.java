@@ -40,7 +40,7 @@ public class OutboundProcessor implements Processor<Object, OutboundRequestInfo>
 		chain.doChain(data);
 		
 		Object respMsg;
-		if(data.getRequestMessage() instanceof Message) {
+		if (data.getRequestMessage() instanceof Message) {
 			respMsg = SwapAreaUtil.getOutboundResponseMessage();
 			ResponseHead head = (ResponseHead)((Message<Head, Body>)respMsg).getHead();
 			String respStatus = head.getSysRespStatus();

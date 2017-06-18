@@ -16,11 +16,11 @@ public final class ExceptionUtil {
 	}
 	
 	public static ServiceException findServiceException(Throwable t) {
-		if(t instanceof ServiceException) {
+		if (t instanceof ServiceException) {
 			return (ServiceException)t;
 		}
 		while ((t = t.getCause()) != null) {
-			if(t instanceof ServiceException) {
+			if (t instanceof ServiceException) {
 				return (ServiceException)t;
 			}
 		}
@@ -28,11 +28,11 @@ public final class ExceptionUtil {
 	}
 	
 	public static SQLException findSQLException(Throwable t) {
-		if(t instanceof SQLException) {
+		if (t instanceof SQLException) {
 			return (SQLException)t;
 		}
 		while ((t = t.getCause()) != null) {
-			if(t instanceof SQLException) {
+			if (t instanceof SQLException) {
 				return (SQLException)t;
 			}
 		}

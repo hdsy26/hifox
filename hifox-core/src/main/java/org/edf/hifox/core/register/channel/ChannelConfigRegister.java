@@ -40,13 +40,13 @@ public class ChannelConfigRegister extends AbstractRegister {
 	public void regist(Resource[] resources) throws Exception {
 		logger.info(LogCodeConstant.REG00005);
 		ChannelCfg result;
-		for(Resource resource : resources) {
+		for (Resource resource : resources) {
 			logger.info(LogCodeConstant.REG00006, new Object[]{resource.getURI()});
 			result = parser.parse(resource);
 			
 			Channel channel;
-			for(ChannelDef channelDef : result.getChannels()) {
-				if(ChannelConstant.HTTP.equals(channelDef.getType())) {
+			for (ChannelDef channelDef : result.getChannels()) {
+				if (ChannelConstant.HTTP.equals(channelDef.getType())) {
 					HttpEndpointDef httpEndpointDef = channelDef.getHttpEndpointDef();
 					
 					HttpEndpoint endpoint = new HttpEndpoint();

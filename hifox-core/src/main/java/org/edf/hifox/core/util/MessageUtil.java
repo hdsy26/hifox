@@ -60,7 +60,7 @@ public final class MessageUtil {
 	public static RequestHead getRequestHead() {
 		Message<Head, Body> reqMsg = (Message<Head, Body>)SwapAreaUtil.getInboundRequestMessage();
 		
-		if(reqMsg == null) {
+		if (reqMsg == null) {
 			RequestHead head = new RequestHead();
 			head.setSysReqNodeId("");
 			head.setSysTargetNodeId("");

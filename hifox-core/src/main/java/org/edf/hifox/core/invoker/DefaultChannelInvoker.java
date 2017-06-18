@@ -29,9 +29,9 @@ public class DefaultChannelInvoker implements Invoker<String, OutboundRequestInf
 	public String invoke(OutboundRequestInfo data) {
 		String targetNodeId = SwapAreaUtil.getOutboundServiceDirItem().get(ServiceDirConstant.TARGET_NODE_ID);
 		String respMsgStr;
-		if(data.getRequestMessage() instanceof Message)
+		if (data.getRequestMessage() instanceof Message)
 			respMsgStr = sendMsg(targetNodeId, SwapAreaUtil.getOutboundServiceId(), data.getContentString());
-		else if(data.getRequestMessage() instanceof Map)
+		else if (data.getRequestMessage() instanceof Map)
 			respMsgStr = sendMsg(targetNodeId, SwapAreaUtil.getOutboundServiceId(), (Map<String, String>)data.getRequestMessage());
 		else
 			respMsgStr = sendMsg(targetNodeId, SwapAreaUtil.getOutboundServiceId(), data.getContentString());

@@ -41,10 +41,10 @@ public class PoiExportExcel {
 	
 	public static String getSheetName(String id) {
 		ExcelDef def = registry.getMeta(id);
-		if(def == null)
+		if (def == null)
 			def = SwapAreaUtil.getValue("['" + id + "']", ExcelDef.class);
 		
-		if(def == null)
+		if (def == null)
 			throw new FailureException(ErrorCodeConstant.E0001S004, new Object[]{id});
 		
 		return def.getSheetName();
@@ -53,17 +53,17 @@ public class PoiExportExcel {
 
 	public static void export(String id, String dir, String fileName, List<Object> listdata) throws Exception {
 		ExcelDef def = registry.getMeta(id);
-		if(def == null)
+		if (def == null)
 			def = SwapAreaUtil.getValue("['" + id + "']", ExcelDef.class);
 		
-		if(def == null)
+		if (def == null)
 			throw new FailureException(ErrorCodeConstant.E0001S004, new Object[]{id});
 		
 		FileOutputStream fos = null;
 		Workbook wb = null;
 		try {
 			File file = new File(dir);
-			if(!file.exists())
+			if (!file.exists())
 				file.mkdirs();
 			
 			fos = new FileOutputStream(dir + SysParamConstant.LINE_SEPARATOR + fileName);
@@ -74,7 +74,7 @@ public class PoiExportExcel {
 			createHead(id, sheet);
 			
 			int y = 1;
-			for(Object item : listdata) {
+			for (Object item : listdata) {
 				export(id, sheet, item, y);
 				y++;
 			}
@@ -85,12 +85,12 @@ public class PoiExportExcel {
 			logger.error(LogCodeConstant.SYS00009, e);
 			throw e;
 		} finally {
-			if(wb != null)
+			if (wb != null)
 				try {
 					wb.close();
 				} catch (Exception e) {
 				}
-			if(fos != null)
+			if (fos != null)
 				try {
 					fos.close();
 				} catch (IOException e) {
@@ -100,17 +100,17 @@ public class PoiExportExcel {
 	
 	public static void createHead(String id, Sheet sheet) throws Exception {
 		ExcelDef def = registry.getMeta(id);
-		if(def == null)
+		if (def == null)
 			def = SwapAreaUtil.getValue("['" + id + "']", ExcelDef.class);
 		
-		if(def == null)
+		if (def == null)
 			throw new FailureException(ErrorCodeConstant.E0001S004, new Object[]{id});
 		
 		List<Column> columns = def.getColumns();
 		
 		Row row = sheet.createRow(0);
 		int x = 0;
-		for(Column column : columns) {
+		for (Column column : columns) {
 			Cell cell = row.createCell(x);
 			cell.setCellValue(column.getHeadtext());
 			x++;
@@ -120,10 +120,10 @@ public class PoiExportExcel {
 	@SuppressWarnings("unchecked")
 	public static void export(String id, Sheet sheet, Object item, int y) throws Exception {
 		ExcelDef def = registry.getMeta(id);
-		if(def == null)
+		if (def == null)
 			def = SwapAreaUtil.getValue("['" + id + "']", ExcelDef.class);
 		
-		if(def == null)
+		if (def == null)
 			throw new FailureException(ErrorCodeConstant.E0001S004, new Object[]{id});
 		
 		List<Column> columns = def.getColumns();
@@ -131,23 +131,23 @@ public class PoiExportExcel {
 		Row row = sheet.createRow(y);
 		int x = 0;
 		Object obj;
-		for(Column column : columns) {
+		for (Column column : columns) {
 			Cell cell = row.createCell(x);
 			
-			if(item instanceof Map)
+			if (item instanceof Map)
 				obj = ((Map<String, Object>)item).get(column.getDatafield());
 			else
 				obj = PropertyUtils.getProperty(item, column.getDatafield());
 			
-			if(obj == null) {
+			if (obj == null) {
 				cell.setCellValue("");
-			} else if("label".equals(column.getType()))
+			} else if ("label".equals(column.getType()))
 				cell.setCellValue((String)obj);
-			else if("number".equals(column.getType()))
+			else if ("number".equals(column.getType()))
 				cell.setCellValue((Double)obj);
-			else if("datetime".equals(column.getType()))
+			else if ("datetime".equals(column.getType()))
 				cell.setCellValue((Date)obj);
-			else if("formula".equals(column.getType()))
+			else if ("formula".equals(column.getType()))
 				cell.setCellFormula((String)obj);
 			else
 				throw new RuntimeException("column type error!");

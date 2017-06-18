@@ -30,25 +30,25 @@ public class I18nLogger implements Logger {
 
 	@Override
 	public void trace(String code) {
-		if(isTraceEnabled())
+		if (isTraceEnabled())
 			logger.trace(getMessage(code));
 	}
 
 	@Override
 	public void trace(String code, Object[] args) {
-		if(isTraceEnabled())
+		if (isTraceEnabled())
 			logger.trace(getMessage(code, args));
 	}
 
 	@Override
 	public void trace(String code, Throwable t) {
-		if(isTraceEnabled())
+		if (isTraceEnabled())
 			logger.trace(getMessage(code), t);
 	}
 
 	@Override
 	public void trace(String code, Object[] args, Throwable t) {
-		if(isTraceEnabled())
+		if (isTraceEnabled())
 			logger.trace(getMessage(code, args), t);
 	}
 
@@ -59,25 +59,25 @@ public class I18nLogger implements Logger {
 
 	@Override
 	public void debug(String code) {
-		if(isDebugEnabled())
+		if (isDebugEnabled())
 			logger.debug(getMessage(code));
 	}
 
 	@Override
 	public void debug(String code, Object[] args) {
-		if(isDebugEnabled())
+		if (isDebugEnabled())
 			logger.debug(getMessage(code, args));
 	}
 
 	@Override
 	public void debug(String code, Throwable t) {
-		if(isDebugEnabled())
+		if (isDebugEnabled())
 			logger.debug(getMessage(code), t);
 	}
 
 	@Override
 	public void debug(String code, Object[] args, Throwable t) {
-		if(isDebugEnabled())
+		if (isDebugEnabled())
 			logger.debug(getMessage(code, args), t);
 	}
 
@@ -88,25 +88,25 @@ public class I18nLogger implements Logger {
 
 	@Override
 	public void info(String code) {
-		if(isInfoEnabled())
+		if (isInfoEnabled())
 			logger.info(getMessage(code));
 	}
 
 	@Override
 	public void info(String code, Object[] args) {
-		if(isInfoEnabled())
+		if (isInfoEnabled())
 			logger.info(getMessage(code, args));
 	}
 
 	@Override
 	public void info(String code, Throwable t) {
-		if(isInfoEnabled())
+		if (isInfoEnabled())
 			logger.info(getMessage(code), t);
 	}
 
 	@Override
 	public void info(String code, Object[] args, Throwable t) {
-		if(isInfoEnabled())
+		if (isInfoEnabled())
 			logger.info(getMessage(code, args), t);
 	}
 
@@ -117,25 +117,25 @@ public class I18nLogger implements Logger {
 
 	@Override
 	public void warn(String code) {
-		if(isWarnEnabled())
+		if (isWarnEnabled())
 			logger.warn(getMessage(code));
 	}
 
 	@Override
 	public void warn(String code, Object[] args) {
-		if(isWarnEnabled())
+		if (isWarnEnabled())
 			logger.warn(getMessage(code, args));
 	}
 
 	@Override
 	public void warn(String code, Throwable t) {
-		if(isWarnEnabled())
+		if (isWarnEnabled())
 			logger.warn(getMessage(code), t);
 	}
 
 	@Override
 	public void warn(String code, Object[] args, Throwable t) {
-		if(isWarnEnabled())
+		if (isWarnEnabled())
 			logger.warn(getMessage(code, args), t);
 	}
 
@@ -146,25 +146,25 @@ public class I18nLogger implements Logger {
 
 	@Override
 	public void error(String code) {
-		if(isErrorEnabled())
+		if (isErrorEnabled())
 			logger.error(getMessage(code));
 	}
 
 	@Override
 	public void error(String code, Object[] args) {
-		if(isErrorEnabled())
+		if (isErrorEnabled())
 			logger.error(getMessage(code, args));
 	}
 
 	@Override
 	public void error(String code, Throwable t) {
-		if(isErrorEnabled())
+		if (isErrorEnabled())
 			logger.error(getMessage(code), t);
 	}
 
 	@Override
 	public void error(String code, Object[] args, Throwable t) {
-		if(isErrorEnabled())
+		if (isErrorEnabled())
 			logger.error(getMessage(code, args), t);
 	}
 	

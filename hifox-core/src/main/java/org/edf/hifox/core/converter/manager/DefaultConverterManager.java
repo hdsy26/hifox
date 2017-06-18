@@ -24,7 +24,7 @@ public class DefaultConverterManager implements ConverterManager<Object, Object>
 	@Override
 	public Object convert(String mappingId, Object source) {
 		ConverterMapping<Object, Object, Rule> mapping = registry.getMeta(mappingId);
-		if(mapping == null)
+		if (mapping == null)
 			throw new FailureException(ErrorCodeConstant.E0001S003, new Object[]{mappingId});
 		Converter<Object, Object, Rule> converter = mapping.getConverter();
 		Object result = converter.convert(source, mapping.getRule());

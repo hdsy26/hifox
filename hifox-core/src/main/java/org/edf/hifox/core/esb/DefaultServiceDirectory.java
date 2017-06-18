@@ -27,7 +27,7 @@ public class DefaultServiceDirectory implements ServiceDirectory<Map<String, Str
 	public Map<String, String> lookup(String serviceId) {
 		Map<String, String> dirItem = dir.get(serviceId);
 		
-		if(dirItem == null)
+		if (dirItem == null)
 			throw new FailureException(ErrorCodeConstant.E0001S005, new Object[]{serviceId});
 		
 		logger.info(LogCodeConstant.REG00014, new Object[]{dirItem});

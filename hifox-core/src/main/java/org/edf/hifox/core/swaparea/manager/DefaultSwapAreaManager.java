@@ -24,7 +24,7 @@ public class DefaultSwapAreaManager implements SwapAreaManager {
 	@Override
 	public SwapArea buildNewSwapArea() {
 		SwapArea swapArea = swapAreaHolder.getCurrentSwapArea();
-		if(swapArea == null) {
+		if (swapArea == null) {
 			swapArea = new DefaultSwapArea(expressionParser);
 			swapAreaHolder.setCurrentSwapArea(swapArea);
 		}

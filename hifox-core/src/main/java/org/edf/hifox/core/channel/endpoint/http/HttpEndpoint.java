@@ -123,7 +123,7 @@ public class HttpEndpoint implements Endpoint {
 	    } catch (Exception e) {
 	    	throw new RuntimeException(e);
 		} finally {
-			if(httpPost != null)
+			if (httpPost != null)
 	    		httpPost.abort();
 		}
 		return respMsg;

@@ -31,7 +31,7 @@ public class DefaultServiceInvoker implements Invoker<Body, InboundRequestInfo> 
 		String serviceId = data.getServiceId();
 		
 		ServiceDef serviceDef = registry.getMeta(serviceId);
-		if(serviceDef == null)
+		if (serviceDef == null)
 			throw new FailureException(ErrorCodeConstant.E0001S002, new Object[]{serviceId});
 		
 		String beanId = serviceDef.getBeanId();
@@ -41,7 +41,7 @@ public class DefaultServiceInvoker implements Invoker<Body, InboundRequestInfo> 
 		Class<?>[] argTypes = new Class[arguments.size()];
 		Object[] args = new Object[arguments.size()];
 		int i = 0;
-		for(Argument argument : arguments) {
+		for (Argument argument : arguments) {
 			try {
 				argTypes[i] = Class.forName(argument.getType());
 			} catch (ClassNotFoundException e) {

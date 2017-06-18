@@ -22,7 +22,7 @@ public class JaxbRuleCreator implements RuleCreator<JaxbRule> {
 		try {
 			Class<?>[] clazzs = new Class<?>[defs.size()];
 			int i = 0;
-			for(ClassDef def : defs) {
+			for (ClassDef def : defs) {
 				clazzs[i] = Class.forName(def.getName());
 				i++;
 			}

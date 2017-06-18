@@ -28,11 +28,11 @@ public class HttpChannel implements Channel {
 
 	@Override
 	public String sendMsg(String serviceId, String reqMsgStr) {
-		for(int i=0; i<=retryCount; i++) {
+		for (int i=0; i<=retryCount; i++) {
 			try {
 				return endpoint.send(serviceId, reqMsgStr);
 			} catch (Exception e) {
-				if(i == retryCount)
+				if (i == retryCount)
 					throw new RuntimeException(e);
 				
 				logger.info(LogCodeConstant.SYS00014, new Object[]{delayTime});
@@ -50,11 +50,11 @@ public class HttpChannel implements Channel {
 
 	@Override
 	public String sendMsg(String serviceId, Map<String, String> reqMsg) {
-		for(int i=0; i<=retryCount; i++) {
+		for (int i=0; i<=retryCount; i++) {
 			try {
 				return endpoint.send(serviceId, reqMsg);
 			} catch (Exception e) {
-				if(i == retryCount)
+				if (i == retryCount)
 					throw new RuntimeException(e);
 				
 				logger.info(LogCodeConstant.SYS00014, new Object[]{delayTime});

@@ -35,10 +35,10 @@ public class ServiceConfigRegister extends AbstractRegister {
 	public void regist(Resource[] resources) throws Exception {
 		logger.info(LogCodeConstant.REG00003);
 		ServiceCfg serviceCfg;
-		for(Resource resource : resources) {
+		for (Resource resource : resources) {
 			logger.info(LogCodeConstant.REG00004, new Object[]{resource.getURI()});
 			serviceCfg = parser.parse(resource);
-			for(ServiceDef serviceDef : serviceCfg.getServiceDefs()) {
+			for (ServiceDef serviceDef : serviceCfg.getServiceDefs()) {
 				registry.addUniqueMeta(serviceDef.getId(), serviceDef);
 			}
 		}

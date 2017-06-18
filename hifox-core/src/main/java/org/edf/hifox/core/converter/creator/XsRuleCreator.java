@@ -23,13 +23,13 @@ public class XsRuleCreator implements RuleCreator<XsRule> {
 		XStream parser = new XStream(new Xpp3Driver(new NoNameCoder()));
 		List<ClassDef> defs = meta.getClassDefs();
 		try {
-			for(ClassDef def : defs) {
+			for (ClassDef def : defs) {
 				Class<?> type = Class.forName(def.getName());
 				parser.processAnnotations(type);
 				
 				List<FieldDef> fieldDefs = def.getFieldDefs();
-				if(fieldDefs != null)
-					for(FieldDef item : fieldDefs) {
+				if (fieldDefs != null)
+					for (FieldDef item : fieldDefs) {
 						parser.alias(item.getName(), Class.forName(item.getFieldType()), Class.forName(item.getFieldImpl()));
 					}
 			}

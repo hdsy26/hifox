@@ -12,7 +12,7 @@ public class Log4jContext implements LogContext {
 
 	@Override
 	public void putContext(String key, String value) {
-		if(value == null)
+		if (value == null)
 			return;
 		MDC.put(key, value);
 	}

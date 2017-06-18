@@ -34,9 +34,9 @@ public class OutboundSwapAreaHandler implements Handler<OutboundRequestInfo> {
 
 	@Override
 	public void handle(OutboundRequestInfo data, Invocation invocation) {
-		if(data.getRequestMessage() instanceof Message) {
+		if (data.getRequestMessage() instanceof Message) {
 			messageHandle(data, invocation);
-		} else if(data.getRequestMessage() instanceof Map) {
+		} else if (data.getRequestMessage() instanceof Map) {
 			mapHandle(data, invocation);
 		} else {
 			stringHandle(data, invocation);

@@ -35,10 +35,10 @@ public class ExcelConfigRegister extends AbstractRegister {
 	public void regist(Resource[] resources) throws Exception {
 		logger.info(LogCodeConstant.REG00007);
 		ExcelCfg excelCfg;
-		for(Resource resource : resources) {
+		for (Resource resource : resources) {
 			logger.info(LogCodeConstant.REG00008, new Object[]{resource.getURI()});
 			excelCfg = parser.parse(resource);
-			for(ExcelDef excelDef : excelCfg.getExcelDefs()) {
+			for (ExcelDef excelDef : excelCfg.getExcelDefs()) {
 				registry.addUniqueMeta(excelDef.getId(), excelDef);
 			}
 		}

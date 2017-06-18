@@ -34,7 +34,7 @@ public class LoggerFactory {
 	}
 	
 	public static Class<? extends org.slf4j.Logger> getLoggerType() {
-		if(map.isEmpty())
+		if (map.isEmpty())
 			return null;
 		Set<org.slf4j.Logger> set = map.keySet();
 		return set.iterator().next().getClass();

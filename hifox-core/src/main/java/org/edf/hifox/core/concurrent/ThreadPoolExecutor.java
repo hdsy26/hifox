@@ -126,14 +126,14 @@ public class ThreadPoolExecutor implements ExecutorService {
 
 	@Override
 	public List<Runnable> shutdownNow() {
-		if(!allowShutdownNow)
+		if (!allowShutdownNow)
 			throw new FailureException(ErrorCodeConstant.E0001S050);
 		return threadPoolExecutor.shutdownNow();
 	}
 
 	@Override
 	public boolean isShutdown() {
-		if(!allowShutdown)
+		if (!allowShutdown)
 			throw new FailureException(ErrorCodeConstant.E0001S051);
 		return threadPoolExecutor.isShutdown();
 	}

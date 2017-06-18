@@ -48,7 +48,7 @@ public class ConverterConfigRegister extends AbstractRegister {
 	public void regist(Resource[] resources) throws Exception {
 		logger.info(LogCodeConstant.REG00001);
 		ConverterCfg result;
-		for(Resource resource : resources) {
+		for (Resource resource : resources) {
 			logger.info(LogCodeConstant.REG00002, new Object[]{resource.getURI()});
 			result = parser.parse(resource);
 			Converter converter;
@@ -56,17 +56,17 @@ public class ConverterConfigRegister extends AbstractRegister {
 			Rule rule;
 			TemplateDef templateDef;
 			List<ClassDef> classDefs;
-			for(ConverterMapping<?, ?, Rule> mapping : result.getMappings()) {
+			for (ConverterMapping<?, ?, Rule> mapping : result.getMappings()) {
 				classDefs = mapping.getClassDefs();
 				templateDef = mapping.getTemplateDef();
-				if((classDefs != null && templateDef != null) || 
+				if ((classDefs != null && templateDef != null) || 
 						(classDefs == null && templateDef == null))
 					throw new InitializationException("configuration error!");
-				if(templateDef != null) {
-					if(templateDef.getEmbed() != null) {
+				if (templateDef != null) {
+					if (templateDef.getEmbed() != null) {
 						ClassPathResource res = new ClassPathResource(templateDef.getEmbed());
 						String encoding = templateDef.getEncoding();
-						if(encoding == null)
+						if (encoding == null)
 							encoding = Charset.defaultCharset().name();
 						String embedStr = StreamUtil.readStream(res.getInputStream(), templateDef.getEncoding(), true);
 						templateDef.setValue(embedStr.replace(ConvertConstant.EMBED_SIGN, templateDef.getValue()));

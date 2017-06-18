@@ -44,10 +44,10 @@ public class JxlExportExcel {
 	
 	public static String getSheetName(String id) {
 		ExcelDef def = registry.getMeta(id);
-		if(def == null)
+		if (def == null)
 			def = SwapAreaUtil.getValue("['" + id + "']", ExcelDef.class);
 		
-		if(def == null)
+		if (def == null)
 			throw new FailureException(ErrorCodeConstant.E0001S004, new Object[]{id});
 		
 		return def.getSheetName();
@@ -56,17 +56,17 @@ public class JxlExportExcel {
 
 	public static void export(String id, String dir, String fileName, List<Object> listdata) throws Exception {
 		ExcelDef def = registry.getMeta(id);
-		if(def == null)
+		if (def == null)
 			def = SwapAreaUtil.getValue("['" + id + "']", ExcelDef.class);
 		
-		if(def == null)
+		if (def == null)
 			throw new FailureException(ErrorCodeConstant.E0001S004, new Object[]{id});
 		
 		FileOutputStream fos = null;
 		WritableWorkbook wwb = null;
 		try {
 			File file = new File(dir);
-			if(!file.exists())
+			if (!file.exists())
 				file.mkdirs();
 			
 			fos = new FileOutputStream(dir + SysParamConstant.LINE_SEPARATOR + fileName);
@@ -76,7 +76,7 @@ public class JxlExportExcel {
 			createHead(id, sheet);
 			
 			int y = 1;
-			for(Object item : listdata) {
+			for (Object item : listdata) {
 				export(id, sheet, item, y);
 				y++;
 			}
@@ -85,12 +85,12 @@ public class JxlExportExcel {
 			logger.error(LogCodeConstant.SYS00009, e);
 			throw e;
 		} finally {
-			if(wwb != null)
+			if (wwb != null)
 				try {
 					wwb.close();
 				} catch (Exception e) {
 				}
-			if(fos != null)
+			if (fos != null)
 				try {
 					fos.close();
 				} catch (IOException e) {
@@ -100,15 +100,15 @@ public class JxlExportExcel {
 	
 	public static void createHead(String id, WritableSheet sheet) throws Exception {
 		ExcelDef def = registry.getMeta(id);
-		if(def == null)
+		if (def == null)
 			def = SwapAreaUtil.getValue("['" + id + "']", ExcelDef.class);
 		
-		if(def == null)
+		if (def == null)
 			throw new FailureException(ErrorCodeConstant.E0001S004, new Object[]{id});
 		
 		List<Column> columns = def.getColumns();
 		int x = 0;
-		for(Column column : columns) {
+		for (Column column : columns) {
 			sheet.addCell(new Label(x, 0, column.getHeadtext()));
 			x++;
 		}
@@ -117,32 +117,32 @@ public class JxlExportExcel {
 	@SuppressWarnings("unchecked")
 	public static void export(String id, WritableSheet sheet, Object item, int y) throws Exception {
 		ExcelDef def = registry.getMeta(id);
-		if(def == null)
+		if (def == null)
 			def = SwapAreaUtil.getValue("['" + id + "']", ExcelDef.class);
 		
-		if(def == null)
+		if (def == null)
 			throw new FailureException(ErrorCodeConstant.E0001S004, new Object[]{id});
 		
 		List<Column> columns = def.getColumns();
 		try {
 			int x = 0;
 			Object obj;
-			for(Column column : columns) {
+			for (Column column : columns) {
 				
 				if(item instanceof Map)
 					obj = ((Map<String, Object>)item).get(column.getDatafield());
 				else
 					obj = PropertyUtils.getProperty(item, column.getDatafield());
 				
-				if(obj == null) {
+				if (obj == null) {
 					sheet.addCell(new Label(x, y, ""));
-				} else if("label".equals(column.getType()))
+				} else if ("label".equals(column.getType()))
 					sheet.addCell(new Label(x, y, (String)obj));
-				else if("number".equals(column.getType()))
+				else if ("number".equals(column.getType()))
 					sheet.addCell(new Number(x, y, (Double)obj));
-				else if("datetime".equals(column.getType()))
+				else if ("datetime".equals(column.getType()))
 					sheet.addCell(new DateTime(x, y, (Date)obj));
-				else if("formula".equals(column.getType()))
+				else if ("formula".equals(column.getType()))
 					sheet.addCell(new Formula(x, y, (String)obj));
 				else
 					throw new RuntimeException("column type error!");

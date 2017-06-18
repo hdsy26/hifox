@@ -19,7 +19,7 @@ public class MetaRegistry<E> {
 	}
 	
 	public void addUniqueMeta(String key, E meta) {
-		if(metas.containsKey(key)) {
+		if (metas.containsKey(key)) {
 			throw new InitializationException(key + " already exist!");
 		}
 		metas.put(key, meta);

@@ -39,7 +39,7 @@ public final class BeanShellUtil {
 	public static <T> T eval(Interpreter interpreter, Map<String, Object> param, String shell) {
 		Set<Entry<String, Object>> set = param.entrySet();
 		try {
-			for(Entry<String, Object> entry : set) {
+			for (Entry<String, Object> entry : set) {
 				interpreter.set(entry.getKey(), entry.getValue());
 			}
 			return (T)interpreter.eval(shell);

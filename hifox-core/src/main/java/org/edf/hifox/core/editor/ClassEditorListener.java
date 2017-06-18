@@ -27,7 +27,7 @@ public class ClassEditorListener implements ServletContextListener {
 		ClassEditor classEditor;
 		Class<ClassEditor> clazz;
 		try {
-			for(String className : classNames) {
+			for (String className : classNames) {
 				clazz = (Class<ClassEditor>) Class.forName(className);
 				classEditor = clazz.newInstance();
 				classEditor.edit();

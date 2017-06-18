@@ -42,7 +42,7 @@ public class DefaultParser implements Parser<Object> {
 		try {
 			ruleis = ruleResource.getInputStream();
 			Digester digester = DigesterLoader.createDigester(new InputSource(ruleis));
-			if(schemaLocation != null) {
+			if (schemaLocation != null) {
 				ClassPathResource res = new ClassPathResource(schemaLocation);
 				digester.setXMLSchema(SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI).newSchema(res.getURL()));
 				digester.setValidating(true);
@@ -71,12 +71,12 @@ public class DefaultParser implements Parser<Object> {
 		    return result;
 		    
 		} finally {
-			if(ruleis != null)
+			if (ruleis != null)
 				try {
 					ruleis.close();
 				} catch (Exception e) {
 				}
-			if(resourceis != null)
+			if (resourceis != null)
 				try {
 					resourceis.close();
 				} catch (Exception e) {

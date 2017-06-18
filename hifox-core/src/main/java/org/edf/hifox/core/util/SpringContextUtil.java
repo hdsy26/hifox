@@ -44,7 +44,7 @@ public class SpringContextUtil implements ApplicationContextAware {
     
     
     public static String getMessageNonstrict(String code, String language, String country) throws NoSuchMessageException {
-    	if(StringUtils.isEmpty(language) || StringUtils.isEmpty(country))
+    	if (StringUtils.isEmpty(language) || StringUtils.isEmpty(country))
     		return context.getMessage(code, null, Locale.getDefault());
     	else
     		return context.getMessage(code, null, new Locale(language, country));
@@ -67,7 +67,7 @@ public class SpringContextUtil implements ApplicationContextAware {
     
     
     public static String getMessageNonstrict(String code, Object[] arg, String language, String country) throws NoSuchMessageException {
-    	if(StringUtils.isEmpty(language) || StringUtils.isEmpty(country))
+    	if (StringUtils.isEmpty(language) || StringUtils.isEmpty(country))
     		return context.getMessage(code, arg, Locale.getDefault());
     	else
     		return context.getMessage(code, arg, new Locale(language, country));

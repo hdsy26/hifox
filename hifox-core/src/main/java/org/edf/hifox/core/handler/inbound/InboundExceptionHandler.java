@@ -53,7 +53,7 @@ public class InboundExceptionHandler implements Handler<InboundRequestInfo> {
 			respHead.setSysRespDatetime(DateFormatUtils.format(new Date(), FormatConstant.YMDHMSS));
 			
 			ServiceException se;
-			if((se = ExceptionUtil.findServiceException(t)) != null) {
+			if ((se = ExceptionUtil.findServiceException(t)) != null) {
 				respHead.setSysRespStatus((se instanceof UncertainException) ? RespStatusConstant.UNCERTAIN : RespStatusConstant.FAILURE);
 				respHead.setSysRespCode(se.getCode());
 				String respDesc = SpringContextUtil.getMessageNonstrict(se.getCode(), se.getParameters(), reqHead.getSysLanguage(), reqHead.getSysCountry());
