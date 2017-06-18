@@ -13,7 +13,7 @@ import org.springframework.beans.factory.BeanNameAware;
  */
 public class HandlerChain implements Chain, BeanNameAware {
 	private List<Handler<Object>> handlerList;
-	private String idorname;
+	private String uniqueMark;
 
 	public void setHandlerList(List<Handler<Object>> handlerList) {
 		this.handlerList = handlerList;
@@ -26,12 +26,12 @@ public class HandlerChain implements Chain, BeanNameAware {
 
 	@Override
 	public void setBeanName(String name) {
-		this.idorname = name;
+		this.uniqueMark = name;
 	}
 
 	@Override
 	public String objectUniqueMark() {
-		return idorname;
+		return uniqueMark;
 	}
 	
 }
