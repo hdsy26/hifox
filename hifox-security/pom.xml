@@ -28,7 +28,7 @@
 		<dependency>
 			<groupId>org.edf</groupId>
 			<artifactId>hifox-core</artifactId>
-			<version>${parent.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 	</dependencies>
 </project>
