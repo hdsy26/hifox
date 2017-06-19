@@ -21,7 +21,11 @@
 	</properties>
 
 	<dependencies>
-		
+		<dependency>
+			<groupId>org.edf</groupId>
+			<artifactId>hifox-security</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
