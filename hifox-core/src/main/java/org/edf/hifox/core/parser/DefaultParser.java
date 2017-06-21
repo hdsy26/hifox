@@ -2,7 +2,6 @@ package org.edf.hifox.core.parser;
 
 import java.io.InputStream;
 
-import javax.xml.XMLConstants;
 import javax.xml.validation.SchemaFactory;
 
 import org.apache.commons.digester.Digester;
@@ -20,6 +19,8 @@ import org.xml.sax.SAXParseException;
  *
  */
 public class DefaultParser implements Parser<Object> {
+	public static final String W3C_XML_SCHEMA_NS_URI = "http://www.w3.org/2001/XMLSchema";
+	
 	private Resource ruleResource;
 	private String schemaLocation;
 	private String className;
@@ -44,7 +45,7 @@ public class DefaultParser implements Parser<Object> {
 			Digester digester = DigesterLoader.createDigester(new InputSource(ruleis));
 			if (schemaLocation != null) {
 				ClassPathResource res = new ClassPathResource(schemaLocation);
-				digester.setXMLSchema(SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI).newSchema(res.getURL()));
+				digester.setXMLSchema(SchemaFactory.newInstance(W3C_XML_SCHEMA_NS_URI).newSchema(res.getURL()));
 				digester.setValidating(true);
 			}
 		    digester.setNamespaceAware(true);
