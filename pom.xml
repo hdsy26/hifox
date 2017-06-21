@@ -103,6 +103,7 @@
 				<groupId>javax.servlet</groupId>
 				<artifactId>servlet-api</artifactId>
 				<version>${servlet_version}</version>
+				<scope>provided</scope>
 			</dependency>
 
 			<dependency>
