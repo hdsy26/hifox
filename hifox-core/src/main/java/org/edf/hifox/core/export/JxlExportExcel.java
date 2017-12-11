@@ -3,6 +3,7 @@ package org.edf.hifox.core.export;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,8 @@ import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.edf.hifox.core.constant.ErrorCodeConstant;
 import org.edf.hifox.core.constant.LogCodeConstant;
 import org.edf.hifox.core.constant.SysParamConstant;
@@ -25,6 +28,7 @@ import org.edf.hifox.core.log.LoggerFactory;
 import org.edf.hifox.core.register.excel.registry.ExcelRegistry;
 import org.edf.hifox.core.register.excel.registry.xmlbean.Column;
 import org.edf.hifox.core.register.excel.registry.xmlbean.ExcelDef;
+import org.edf.hifox.core.util.DateUtil;
 import org.edf.hifox.core.util.SwapAreaUtil;
 
 /**
@@ -134,17 +138,27 @@ public class JxlExportExcel {
 				else
 					obj = PropertyUtils.getProperty(item, column.getDatafield());
 				
-				if (obj == null) {
-					sheet.addCell(new Label(x, y, ""));
-				} else if ("label".equals(column.getType()))
-					sheet.addCell(new Label(x, y, (String)obj));
-				else if ("number".equals(column.getType()))
-					sheet.addCell(new Number(x, y, (Double)obj));
-				else if ("datetime".equals(column.getType()))
-					sheet.addCell(new DateTime(x, y, (Date)obj));
-				else if ("formula".equals(column.getType()))
-					sheet.addCell(new Formula(x, y, (String)obj));
+				String cont;
+				if (obj instanceof String)
+					cont = (String)obj;
+				else if (obj instanceof BigDecimal)
+					cont = ((BigDecimal)obj).toPlainString();
+				else if (obj instanceof Date)
+					cont = DateFormatUtils.format((Date)obj, "yyyy-MM-dd HH:mm:ss");
 				else
+					cont = obj == null ? "" : obj.toString();
+				
+				if ("label".equals(column.getType()))
+					sheet.addCell(new Label(x, y, (String)cont));
+				else if ("number".equals(column.getType()))
+					sheet.addCell(new Number(x, y, new Double(cont)));
+				else if ("datetime".equals(column.getType()))
+					sheet.addCell(new DateTime(x, y, DateUtil.parseDate(cont, "yyyy-MM-dd HH:mm:ss")));
+				else if ("formula".equals(column.getType()))
+					sheet.addCell(new Formula(x, y, cont));
+				else if ("".equals(cont))
+					sheet.addCell(new Label(x, y, ""));
+				else 
 					throw new RuntimeException("column type error!");
 				x++;
 			}
