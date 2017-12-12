@@ -9,7 +9,7 @@ public class SecurityConstant {
 	// 之前为加密数据
 	public static final String METAINFO_PREFIX = " ";
 	public static final String RANDOMKEY_PREFIX = METAINFO_PREFIX + " ";
-	public static final String OBJECT_PREFIX = "	";
+	public static final String OBJECT_PREFIX = " ";
 	public static final String OBJECT_UNIQUE_MARK_CHARSET_NAME = "UTF-8";
 	
 	public static final String SECURITY_MESSAGE_MODE_SIGN = "SIGN";
