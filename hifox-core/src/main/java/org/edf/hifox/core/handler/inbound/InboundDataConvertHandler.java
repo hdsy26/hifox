@@ -16,6 +16,10 @@ import org.edf.hifox.core.reqinfo.InboundRequestInfo;
 import org.edf.hifox.core.util.DataConvertUtil;
 import org.edf.hifox.core.util.SwapAreaUtil;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONPath;
+
 /**
  * 
  * @author WangYang
@@ -29,11 +33,18 @@ public class InboundDataConvertHandler implements Handler<InboundRequestInfo> {
 		Document document;
 		try {
 			document = DocumentHelper.parseText(data.getContentString());
+			Node serviceIdNode = document.selectSingleNode(serviceIdPath);
+			String serviceId = serviceIdNode.getText();
+			data.setServiceId(serviceId);
 		} catch (DocumentException e) {
-			throw new FailureException(ErrorCodeConstant.E0001S061, e);
+			try {
+				JSONObject jsonObj = JSON.parseObject(data.getContentString());
+				String serviceId = (String)JSONPath.eval(jsonObj, "$" + serviceIdPath.replace("/", "."));
+				data.setServiceId(serviceId);
+			} catch (Exception e1) {
+				throw new FailureException(ErrorCodeConstant.E0001S061, e);
+			}
 		}
-		Node serviceIdNode = document.selectSingleNode(serviceIdPath);
-		data.setServiceId(serviceIdNode.getText());
 		
 		Message<Head, Body> requestMessage = DataConvertUtil.convert(data.getServiceId() + ConvertConstant.REQ, data.getContentString());
 		data.setRequestMessage(requestMessage);
