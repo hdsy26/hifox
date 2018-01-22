@@ -9,6 +9,7 @@ import org.edf.hifox.core.constant.ErrorCodeConstant;
 import org.edf.hifox.core.constant.FormatConstant;
 import org.edf.hifox.core.constant.LogCodeConstant;
 import org.edf.hifox.core.constant.RespStatusConstant;
+import org.edf.hifox.core.converter.rule.Rule;
 import org.edf.hifox.core.datatransfer.Message;
 import org.edf.hifox.core.datatransfer.support.RequestHead;
 import org.edf.hifox.core.datatransfer.support.ResponseHead;
@@ -18,6 +19,8 @@ import org.edf.hifox.core.exception.UncertainException;
 import org.edf.hifox.core.handler.Handler;
 import org.edf.hifox.core.log.Logger;
 import org.edf.hifox.core.log.LoggerFactory;
+import org.edf.hifox.core.register.converter.registry.ConverterRegistry;
+import org.edf.hifox.core.register.converter.registry.xmlbean.ConverterMapping;
 import org.edf.hifox.core.reqinfo.InboundRequestInfo;
 import org.edf.hifox.core.util.DataConvertUtil;
 import org.edf.hifox.core.util.ExceptionUtil;
@@ -32,6 +35,13 @@ import org.edf.hifox.core.util.SwapAreaUtil;
  */
 public class InboundExceptionHandler implements Handler<InboundRequestInfo> {
 	private static final Logger logger = LoggerFactory.getLogger(InboundExceptionHandler.class);
+	
+	private ConverterRegistry registry;
+
+	public void setRegistry(ConverterRegistry registry) {
+		this.registry = registry;
+	}
+
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
@@ -67,7 +77,15 @@ public class InboundExceptionHandler implements Handler<InboundRequestInfo> {
 			
 			SwapAreaUtil.setInboundResponseMessage((Message)respMsg);
 			
-			String respMsgStr = DataConvertUtil.convert(ConvertConstant.EXCEPTION_MAPPING_ID, respMsg);
+			String respMsgStr;
+			ConverterMapping<?, ?, Rule> converterMapping;
+			if (registry != null && (converterMapping = registry.getMeta(SwapAreaUtil.getInboundServiceId())) != null) {
+				String ruleCreatorId = converterMapping.getRuleCreatorId();
+				respMsgStr = DataConvertUtil.convert(ConvertConstant.EXCEPTION_MAPPING_ID + "_" + ruleCreatorId.toUpperCase(), respMsg);
+			} else {
+				respMsgStr = DataConvertUtil.convert(ConvertConstant.EXCEPTION_MAPPING_ID, respMsg);
+			}
+			
 			SwapAreaUtil.setInboundResponseMsgStr(respMsgStr);
 		}
 		
