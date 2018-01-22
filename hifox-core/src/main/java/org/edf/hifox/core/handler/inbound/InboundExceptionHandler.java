@@ -79,7 +79,7 @@ public class InboundExceptionHandler implements Handler<InboundRequestInfo> {
 			
 			String respMsgStr;
 			ConverterMapping<?, ?, Rule> converterMapping;
-			if (registry != null && (converterMapping = registry.getMeta(SwapAreaUtil.getInboundServiceId())) != null) {
+			if (registry != null && (converterMapping = registry.getMeta(SwapAreaUtil.getInboundServiceId() + "-response")) != null) {
 				String ruleCreatorId = converterMapping.getRuleCreatorId();
 				respMsgStr = DataConvertUtil.convert(ConvertConstant.EXCEPTION_MAPPING_ID + "_" + ruleCreatorId.toUpperCase(), respMsg);
 			} else {
